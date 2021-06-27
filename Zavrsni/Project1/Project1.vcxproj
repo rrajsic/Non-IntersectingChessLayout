@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="BoardFunctions.cpp" />
     <ClCompile Include="Chessboard.cpp" />
+    <ClCompile Include="ChessboardMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PieceFunctions.cpp" />
     <ClCompile Include="testcpp.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardFunctions.h" />
     <ClInclude Include="Chessboard.h" />
+    <ClInclude Include="ChessboardMenu.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="EnumType.h" />
     <ClInclude Include="IPiece.h" />

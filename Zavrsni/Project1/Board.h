@@ -39,11 +39,14 @@ public:
 		for (int i = 0; i < m_board_size; i++)
 			board[i] = new int[m_board_size];
 		initializeBoard(board);
+		int counter(1);
+		int num_of_permutations = m_all_pieces_permutations.size();
 		while (!m_all_pieces_permutations.empty()) {
 			std::vector<IPiece*> temp_pieces = deepCopyVector(m_all_pieces_permutations.back());
-			printPieces(temp_pieces);
+			std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 			tryAllCombinations(board, temp_pieces, 0, temp_pieces.size() - 1);
 			m_all_pieces_permutations.pop_back();
+			counter++;
 		}
 
 		/*while(!m_all_pieces_permutations.empty()){
@@ -96,12 +99,15 @@ public:
 		for (int i = 0; i < m_board_size; i++)
 			board[i] = new int[m_board_size];
 		initializeBoard(board);
-
+		int counter(1);
+		int num_of_permutations = m_all_pieces_permutations.size();
 		while (!m_all_pieces_permutations.empty()) {
+			
 			std::vector<IPiece*> temp_pieces = deepCopyVector(m_all_pieces_permutations.back());
+			std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 			saveFirstPossibleCombination(board, temp_pieces);
-			printPieces(temp_pieces);
 			m_all_pieces_permutations.pop_back();
+			counter++;
 		}
 
 	}
@@ -149,7 +155,6 @@ public:
 						pieces.pop_back();
 						if (pieces.empty()) {
 							if (!doesSameBoardExist(new Chessboard(temp_board, m_board_size)))m_boards.push_back(new Chessboard(deepCopyBoard(temp_board), m_board_size));
-							printBoard(temp_board);
 							return;
 						}
 						else {
@@ -163,6 +168,7 @@ public:
 	}
 	
 	void setVectors() {
+		std::cout << "Permuting...\n";
 		for (int k = 0; k < permutationWithoutRepetiton(m_pieces.size()); k++) {
 			std::next_permutation(m_pieces.begin(), m_pieces.end());
 			if (!doesVectorExist(m_pieces))

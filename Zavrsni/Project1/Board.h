@@ -20,10 +20,11 @@ public:
 	std::vector<IPiece*>m_pieces;
 	std::vector<std::vector<IPiece*>> m_all_pieces_permutations;
 	int m_board_size;
+	
 
 public:
 	Board(int board_size) {
-		m_board_size = board_size;
+		m_board_size = board_size;	
 	}
 
 

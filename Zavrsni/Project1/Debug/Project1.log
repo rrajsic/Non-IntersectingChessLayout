@@ -1,12 +1,17 @@
-﻿  main.cpp
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(186,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(212,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(354,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(377,21): warning C4018: '<': signed/unsigned mismatch
+﻿  ChessboardMenu.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(187,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(213,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(355,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(378,21): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(187,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(213,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(355,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Board.h(378,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(126,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(171,67): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(152,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(197,67): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -15,7 +20,7 @@ C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(171,
           [
               T=float
           ]
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(171,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(197,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -24,24 +29,28 @@ C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(171,
           [
               T=float
           ]
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(183,78): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(209,78): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(183,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(209,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(184,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(210,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(184,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(210,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
+  PieceFunctions.cpp
+  testcpp.cpp
+  Generating Code...
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\PieceFunctions.cpp(215): warning C4715: 'fill_L': not all control paths return a value
   Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\Project1.exe

@@ -54,56 +54,82 @@ int numberOfPieces(int** board,int board_size) {
 	return counter;
 }
 
-int main() {
+void printYeah(){}
 
+int main(int argc, char* argv[]) {
 
+	int* x = new int[argc];
+	for (int i = 1; i < argc; i++) {
+		x[i] = atoi(argv[i]);
+	}
+	const int functionCall = x[1];
+	const int board_size = x[2];
+	const int queen_count = x[3];
+	const int king_count = x[4];
+	const int rook_count = x[5];
+	const int bishop_count = x[6];
+	const int knight_count = x[7];
+	
 
 	const int chess_square_size = 106;
 	int board_number = 0;
 
-	std::cout << "Enter board size: ";
+	/*std::cout << "Enter board size: ";
 	int board_size(0);
 	std::cin >> board_size;
 	std::cout << "Enter number of Queens: ";
-	int num_queens(0);
-	std::cin >> num_queens;
+	int queen_count(0);
+	std::cin >> queen_count;
 	std::cout << "Enter number of Kings: ";
-	int num_kings(0);
-	std::cin >> num_kings;
+	int king_count(0);
+	std::cin >> king_count;
 	std::cout << "Enter number of Rooks: ";
-	int num_rooks(0);
-	std::cin >> num_rooks;
+	int rook_count(0);
+	std::cin >> rook_count;
 	std::cout << "Enter number of Bishops: ";
-	int num_bishops(0);
-	std::cin >> num_bishops;
+	int bishop_count(0);
+	std::cin >> bishop_count;
 	std::cout << "Enter number of Knights: ";
-	int num_knights(0);
-	std::cin >> num_knights;
+	int knight_count(0);
+	std::cin >> knight_count;*/
+
+
 
 	Board board = Board(board_size);
 
 	std::vector<IPiece*>pieces;
 
-	for (int i = 0; i < num_queens; i++) {
+	for (int i = 0; i < queen_count; i++) {
 		board.pushPiece(new Queen(board_size));
 	}
-	for (int i = 0; i < num_kings; i++) {
+	for (int i = 0; i < king_count; i++) {
 		board.pushPiece(new King(board_size));
 	}
-	for (int i = 0; i < num_rooks; i++) {
+	for (int i = 0; i < rook_count; i++) {
 		board.pushPiece(new Rook(board_size));
 	}
-	for (int i = 0; i < num_bishops; i++) {
+	for (int i = 0; i < bishop_count; i++) {
 		board.pushPiece(new Bishop(board_size));
 	}
-	for (int i = 0; i < num_knights; i++) {
+	for (int i = 0; i < knight_count; i++) {
 		board.pushPiece(new Knight(board_size));
 	}
 
 	board.setVectors();
 
-	board.calculateShuffleCombinations();
 
+
+	switch (x[1]) {
+	case 1:
+		board.calculateAllCombinations();
+		break;
+	case 2: 
+		board.calculateShuffleCombinations();
+		break;
+	default: 
+		std::cout << "Error. Wrong function number recieved." << std::endl;
+		exit(1);
+	}
 
 	int number_of_boards = board.m_boards.size();
 

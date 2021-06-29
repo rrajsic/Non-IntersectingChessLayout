@@ -30,7 +30,7 @@
     <ClCompile Include="BoardImageFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardEngine.cpp">
+    <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,13 +56,16 @@
     <ClInclude Include="Chessboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoardEngine.h">
+    <ClInclude Include="Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChessboardMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoardImageFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

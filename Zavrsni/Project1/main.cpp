@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
 		system("pause");
 		exit(1);
 	}
-	int number_of_boards = bEngine.m_boards.size();
+	int number_of_boards = bEngine.getBoards().size();
 
 
 	RenderWindow window(VideoMode(board_size * chess_square_size, board_size * chess_square_size), "Chess");
@@ -158,10 +158,10 @@ int main(int argc, char* argv[]) {
 	Sprite sBoard(t2);
 
 	int** chessboard = new int* [board_size];
-	chessboard = bEngine.m_boards.back()->m_board;
+	chessboard = bEngine.getBoards().back()->m_board;
 
 	int counter{ 0 };
-	for (int i = 0; i < bEngine.m_boards.size(); i++)counter++;
+	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
 
 	std::cout << "NUMBER OF COMBINATIONS: " << counter << "\n";
 	std::cout << "Press space to see next combination" << "\n";
@@ -169,7 +169,7 @@ int main(int argc, char* argv[]) {
 	
 	int *number_of_pieces_per_board = new int[number_of_boards];
 	for (int i = 0; i < number_of_boards; i++) {
-		number_of_pieces_per_board[i] = numberOfPieces(bEngine.m_boards[i]->m_board,board_size);
+		number_of_pieces_per_board[i] = numberOfPieces(bEngine.getBoards()[i]->m_board,board_size);
 	}
 
 	
@@ -185,7 +185,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	for (int k = 0; k < number_of_boards; k++) {
-		loadPosition(bEngine.m_boards[k]->m_board, f, k,board_size);
+		loadPosition(bEngine.getBoards()[k]->m_board, f, k,board_size);
 	}
 	
 	

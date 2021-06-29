@@ -1,10 +1,7 @@
-﻿  BoardEngine.cpp
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
-  ChessboardMenu.cpp
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Engine.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(152,20): warning C4018: '<': signed/unsigned mismatch
   main.cpp
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardImageFactory.h(7,2): warning C4091: 'static ': ignored on left of 'BoardImageFactory' when no variable is declared
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(164,20): warning C4018: '<': signed/unsigned mismatch

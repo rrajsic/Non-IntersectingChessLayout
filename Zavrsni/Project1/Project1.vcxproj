@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoardEngine.cpp" />
     <ClCompile Include="BoardImageFactory.cpp" />
     <ClCompile Include="Chessboard.cpp" />
     <ClCompile Include="ChessboardMenu.cpp" />

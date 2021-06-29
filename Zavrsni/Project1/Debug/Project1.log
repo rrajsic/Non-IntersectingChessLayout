@@ -1,1 +1,50 @@
-﻿  Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\Project1.exe
+﻿  BoardEngine.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
+  ChessboardMenu.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardImageFactory.h(7,2): warning C4091: 'static ': ignored on left of 'BoardImageFactory' when no variable is declared
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardEngine.h(200,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(41,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(164,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(211,67): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(211,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(223,78): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(223,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(224,62): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(224,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating Code...
+  Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\Project1.exe

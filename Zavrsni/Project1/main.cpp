@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "BoardImageFactory.h"
-#include "BoardEngine.h"
+#include "Engine.h"
 #include "Constants.h"
 #include "ChessboardMenu.h"
 
@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
 
 
 
-	BoardEngine bEngine = BoardEngine(board_size);
+	Engine bEngine = Engine(board_size);
 
 	std::vector<IPiece*>pieces;
 

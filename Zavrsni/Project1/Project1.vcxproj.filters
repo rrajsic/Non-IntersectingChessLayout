@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testcpp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BoardFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,7 +56,7 @@
     <ClInclude Include="Chessboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
+    <ClInclude Include="BoardEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChessboardMenu.h">

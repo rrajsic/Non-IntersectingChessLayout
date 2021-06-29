@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "BoardFunctions.h"
-#include "Board.h"
+#include "BoardEngine.h"
 #include "Constants.h"
 #include "ChessboardMenu.h"
 
@@ -58,7 +58,7 @@ void printYeah(){}
 
 int main(int argc, char* argv[]) {
 
-	int* x = new int[argc];
+	/*int* x = new int[argc];
 	for (int i = 1; i < argc; i++) {
 		x[i] = atoi(argv[i]);
 	}
@@ -69,12 +69,12 @@ int main(int argc, char* argv[]) {
 	const int rook_count = x[5];
 	const int bishop_count = x[6];
 	const int knight_count = x[7];
-	
+	*/
 
 	const int chess_square_size = 106;
 	int board_number = 0;
 
-	/*std::cout << "Enter board size: ";
+	std::cout << "Enter board size: ";
 	int board_size(0);
 	std::cin >> board_size;
 	std::cout << "Enter number of Queens: ";
@@ -91,47 +91,59 @@ int main(int argc, char* argv[]) {
 	std::cin >> bishop_count;
 	std::cout << "Enter number of Knights: ";
 	int knight_count(0);
-	std::cin >> knight_count;*/
+	std::cin >> knight_count;
 
 
 
-	Board board = Board(board_size);
+	BoardEngine bEngine = BoardEngine(board_size);
 
 	std::vector<IPiece*>pieces;
 
 	for (int i = 0; i < queen_count; i++) {
-		board.pushPiece(new Queen(board_size));
+		bEngine.pushPiece(new Queen(board_size));
 	}
 	for (int i = 0; i < king_count; i++) {
-		board.pushPiece(new King(board_size));
+		bEngine.pushPiece(new King(board_size));
 	}
 	for (int i = 0; i < rook_count; i++) {
-		board.pushPiece(new Rook(board_size));
+		bEngine.pushPiece(new Rook(board_size));
 	}
 	for (int i = 0; i < bishop_count; i++) {
-		board.pushPiece(new Bishop(board_size));
+		bEngine.pushPiece(new Bishop(board_size));
 	}
 	for (int i = 0; i < knight_count; i++) {
-		board.pushPiece(new Knight(board_size));
+		bEngine.pushPiece(new Knight(board_size));
 	}
 
-	board.setVectors();
+	bEngine.setVectors();
 
 
 
-	switch (x[1]) {
+	/*switch (x[1]) {
 	case 1:
-		board.calculateAllCombinations();
+		bEngine.calculateAllCombinations();
 		break;
 	case 2: 
-		board.calculateShuffleCombinations();
+		bEngine.calculateShuffleCombinations();
 		break;
 	default: 
 		std::cout << "Error. Wrong function number recieved." << std::endl;
 		exit(1);
+	}*/
+	/*
+	if (bEngine.calculateAllCombinations() == false) {
+		std::cout << "Not possible." << std::endl;
+		system("pause");
+		exit(1);
 	}
-
-	int number_of_boards = board.m_boards.size();
+	*/
+	
+	if (bEngine.calculateShuffleCombinations() == false) {
+		std::cout << "Not possible." << std::endl;
+		system("pause");
+		exit(1);
+	}
+	int number_of_boards = bEngine.m_boards.size();
 
 
 	RenderWindow window(VideoMode(board_size * chess_square_size, board_size * chess_square_size), "Chess");
@@ -146,16 +158,18 @@ int main(int argc, char* argv[]) {
 	Sprite sBoard(t2);
 
 	int** chessboard = new int* [board_size];
-	chessboard = board.m_boards.back()->m_board;
+	chessboard = bEngine.m_boards.back()->m_board;
 
 	int counter{ 0 };
-	for (int i = 0; i < board.m_boards.size(); i++)counter++;
+	for (int i = 0; i < bEngine.m_boards.size(); i++)counter++;
 
 	std::cout << "NUMBER OF COMBINATIONS: " << counter << "\n";
+	std::cout << "Press space to see next combination" << "\n";
+	std::cout << "Press backspace to see previous combination" << "\n";
 	
 	int *number_of_pieces_per_board = new int[number_of_boards];
 	for (int i = 0; i < number_of_boards; i++) {
-		number_of_pieces_per_board[i] = numberOfPieces(board.m_boards[i]->m_board,board_size);
+		number_of_pieces_per_board[i] = numberOfPieces(bEngine.m_boards[i]->m_board,board_size);
 	}
 
 	
@@ -171,7 +185,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	for (int k = 0; k < number_of_boards; k++) {
-		loadPosition(board.m_boards[k]->m_board, f, k,board_size);
+		loadPosition(bEngine.m_boards[k]->m_board, f, k,board_size);
 	}
 	
 	

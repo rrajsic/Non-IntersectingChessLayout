@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "BoardFunctions.h"
-#include "Board.h"
+#include "BoardEngine.h"
 #include "Constants.h"
 #include "ChessboardMenu.h"
 

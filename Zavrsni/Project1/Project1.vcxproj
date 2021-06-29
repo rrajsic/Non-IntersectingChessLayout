@@ -150,10 +150,9 @@
     <ClCompile Include="ChessboardMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PieceFunctions.cpp" />
-    <ClCompile Include="testcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardEngine.h" />
     <ClInclude Include="BoardFunctions.h" />
     <ClInclude Include="Chessboard.h" />
     <ClInclude Include="ChessboardMenu.h" />

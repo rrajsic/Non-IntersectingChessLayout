@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "Point2D.h"
 #include "Piece.h"
 int Piece::fillRowAndCol(int** board) {
@@ -16,6 +17,33 @@ int Piece::fillRowAndCol(int** board) {
 				if (board[i][j] > 1)return FAILURE;			//all columns are now taken
 				board[i][j] = 1;
 			}
+		}
+	}
+
+	return SUCCESS;
+}
+void printBoard(int** board, int size) {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j <size; j++) {
+			std::cout << board[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+int Piece::fillDiagonals(int** board) {
+	for (int i = 0; i < m_board_size; i++) {
+		for (int j = 0; j < m_board_size; j++) {
+			std::cout << "row: " << m_position.getRow() << " col: " << m_position.getCol() << std::endl;
+			std::cout << "i: " << i << " j: " << j << std::endl;
+			std::cout << abs(i - m_position.getRow()) << " = " << abs(j - m_position.getCol()) << std::endl;
+			if (abs(i - m_position.getRow()) == abs(j - m_position.getCol())) {
+				std::cout << " SUCCEED "<< std::endl;
+				std::cout << abs(i - m_position.getRow()) << " = " << abs(j - m_position.getCol()) << std::endl;
+				if (board[i][j] > 1)return FAILURE;
+				board[i][j] = 1;
+				printBoard(board,m_board_size);
+			}
+				
 		}
 	}
 

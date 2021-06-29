@@ -35,6 +35,7 @@ public:
 	}
 
 	int fillRowAndCol(int** board);
+	int fillDiagonals(int** board);
 	int fill_diagonal_DownardRight(int** board);
 	int fill_diagonal_DownardLeft(int** board);
 	int fill_diagonal_UpwardRight(int** board);
@@ -97,7 +98,7 @@ public:
 
 	int fillBoard(int** board) {
 
-		if (fillRowAndCol(board) == FAILURE)
+		/*if (fillRowAndCol(board) == FAILURE)
 			return FAILURE;
 		if (fill_diagonal_DownardLeft(board) == FAILURE)
 			return FAILURE;
@@ -106,8 +107,9 @@ public:
 		if (fill_diagonal_DownardRight(board) == FAILURE)
 			return FAILURE;
 		if (fill_diagonal_UpwardRight(board) == FAILURE)
+			return FAILURE;*/
+		if (fillDiagonals(board) == FAILURE)
 			return FAILURE;
-
 		return SUCCESS;
 	}
 	void printPiece() override { std::cout << "Queen" << std::endl; }

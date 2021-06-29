@@ -127,19 +127,21 @@ int main(int argc, char* argv[]) {
 		std::cout << "Error. Wrong function number recieved." << std::endl;
 		exit(1);
 	}*/
-	/*
+	
 	if (bEngine.calculateAllCombinations() == false) {
 		std::cout << "Not possible." << std::endl;
 		system("pause");
 		exit(1);
 	}
-	*/
 	
+	
+	/*
 	if (bEngine.calculateShuffleCombinations() == false) {
 		std::cout << "Not possible." << std::endl;
 		system("pause");
 		exit(1);
 	}
+	*/
 	int number_of_boards = bEngine.getBoards().size();
 
 

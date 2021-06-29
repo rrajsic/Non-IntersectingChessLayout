@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardFunctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Chessboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,11 +27,11 @@
     <ClCompile Include="ChessboardMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BoardImageFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoardFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Point2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ChessboardMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardImageFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

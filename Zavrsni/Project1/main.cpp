@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <time.h>
-#include "BoardFunctions.h"
+#include "BoardImageFactory.h"
 #include "BoardEngine.h"
 #include "Constants.h"
 #include "ChessboardMenu.h"
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 
 	t1.loadFromFile("figures_wip4.png");
 
-	t2.loadFromFile(createBoard(board_size));
+	t2.loadFromFile(BoardImageFactory::createBoard(board_size));
 
 	Sprite s(t1);
 	Sprite sBoard(t2);

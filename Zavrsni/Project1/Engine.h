@@ -21,8 +21,8 @@ public:
 	
 	//Main engine functions
 	bool calculateAllCombinations();
+	bool tryAllCombinations(int** board, std::vector<IPiece*> pieces, int piece_index, int max_piece_index);
 	bool calculateShuffleCombinations();
-	bool tryAllCombinations(int** board, std::vector<IPiece*> pieces, int piece_index, int max_piece_index);	
 	bool saveFirstPossibleCombination(int** board, std::vector<IPiece*> pieces);
 	
 	//Vector Functions

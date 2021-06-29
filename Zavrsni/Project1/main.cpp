@@ -55,7 +55,7 @@ void printYeah(){}
 
 int main(int argc, char* argv[]) {
 
-	/*int* x = new int[argc];
+	int* x = new int[argc];
 	for (int i = 1; i < argc; i++) {
 		x[i] = atoi(argv[i]);
 	}
@@ -66,11 +66,11 @@ int main(int argc, char* argv[]) {
 	const int rook_count = x[5];
 	const int bishop_count = x[6];
 	const int knight_count = x[7];
-	*/
+	
 
 	const int chess_square_size = 106;
 	int board_number = 0;
-
+	/*
 	std::cout << "Enter board size: ";
 	int board_size(0);
 	std::cin >> board_size;
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "Enter number of Knights: ";
 	int knight_count(0);
 	std::cin >> knight_count;
-
+	*/
 
 
 	Engine bEngine = Engine(board_size);
@@ -116,32 +116,29 @@ int main(int argc, char* argv[]) {
 
 
 
-	/*switch (x[1]) {
+	switch (x[1]) {
 	case 1:
-		bEngine.calculateAllCombinations();
+		if (!bEngine.calculateAllCombinations()) {
+			std::cout << "Not possible." << std::endl;
+			system("pause");
+			exit(1);
+		}
 		break;
 	case 2: 
-		bEngine.calculateShuffleCombinations();
+		if(!bEngine.calculateShuffleCombinations()) {
+			std::cout << "Not possible." << std::endl;
+			system("pause");
+			exit(1);
+		}
 		break;
 	default: 
 		std::cout << "Error. Wrong function number recieved." << std::endl;
 		exit(1);
-	}*/
-	
-	if (bEngine.calculateAllCombinations() == false) {
-		std::cout << "Not possible." << std::endl;
-		system("pause");
-		exit(1);
 	}
 	
 	
-	/*
-	if (bEngine.calculateShuffleCombinations() == false) {
-		std::cout << "Not possible." << std::endl;
-		system("pause");
-		exit(1);
-	}
-	*/
+	
+	
 	int number_of_boards = bEngine.getBoards().size();
 
 

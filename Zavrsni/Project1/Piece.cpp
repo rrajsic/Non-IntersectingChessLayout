@@ -9,232 +9,56 @@ int Piece::fillRowAndCol(int** board) {
 		{
 			if (i == m_position.getRow())
 			{
-				if (board[i][j] > 1)return FAILURE;
-				board[i][j] = 1;
+				if (board[i][j] > Type::OCCUPIED)
+					return FAILURE;
+
+				else board[i][j] = Type::OCCUPIED;
 			}											//all rows are now taken
 			if (j == m_position.getCol())
 			{
-				if (board[i][j] > 1)return FAILURE;			//all columns are now taken
-				board[i][j] = 1;
+				if (board[i][j] > Type::OCCUPIED)
+					return FAILURE;			//all columns are now taken
+
+				else board[i][j] = Type::OCCUPIED;
 			}
 		}
 	}
-
 	return SUCCESS;
 }
-void printBoard(int** board, int size) {
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j <size; j++) {
-			std::cout << board[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-}
+
 int Piece::fillDiagonals(int** board) {
 	for (int i = 0; i < m_board_size; i++) {
 		for (int j = 0; j < m_board_size; j++) {
-			std::cout << "row: " << m_position.getRow() << " col: " << m_position.getCol() << std::endl;
-			std::cout << "i: " << i << " j: " << j << std::endl;
-			std::cout << abs(i - m_position.getRow()) << " = " << abs(j - m_position.getCol()) << std::endl;
 			if (abs(i - m_position.getRow()) == abs(j - m_position.getCol())) {
-				std::cout << " SUCCEED "<< std::endl;
-				std::cout << abs(i - m_position.getRow()) << " = " << abs(j - m_position.getCol()) << std::endl;
-				if (board[i][j] > 1)return FAILURE;
-				board[i][j] = 1;
-				printBoard(board,m_board_size);
+				if (board[i][j] > Type::OCCUPIED)
+					return FAILURE;
+				else board[i][j] = Type::OCCUPIED;
 			}
-				
-		}
-	}
-
-	return SUCCESS;
-}
-
-int Piece::fill_diagonal_DownardRight(int** board)
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-
-	for (int i = x; i < m_board_size; i++)			//Fills diagonal: Right - down
-	{
-		int j = y;
-		if (i + 1 >= m_board_size)break;
-		if (j + 1 >= m_board_size)break;
-		if (board[i + 1][j + 1] > 1)return FAILURE;		//if there is a figure there (king, queen, etc..) 
-		board[i + 1][j + 1] = 1;
-		y++;
-	}
-
-	return SUCCESS;
-}
-
-int Piece::fill_diagonal_DownardLeft(int** board)
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-
-	for (int i = x; i < m_board_size; i++)			//Fills diagonal: Left - down
-	{
-		int j = y;
-		if (i + 1 >= m_board_size)break;
-		if (j - 1 < 0)break;
-		if (board[i + 1][j - 1] > 1)return FAILURE;		//if there is a figure there (king, queen, etc..)
-		board[i + 1][j - 1] = 1;
-		y--;
-	}
-	return SUCCESS;
-}
-
-int Piece::fill_diagonal_UpwardRight(int** board)
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-
-	for (int i = x; i >= 0; i--)					//Fills diagonal: Right - up
-	{
-		int j = y;
-		if (i - 1 < 0)break;
-		if (j + 1 >= m_board_size)break;
-		if (board[i - 1][j + 1] > 1)return FAILURE;			//if there is a figure there (king, queen, etc..)
-		board[i - 1][j + 1] = 1;
-		y++;
-	}
-	return SUCCESS;
-}
-
-int Piece::fill_diagonal_UpwardLeft(int** board)
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-
-	for (int i = x; i >= 0; i--)					//Fills diagonal: Left - up
-	{
-		int j = y;
-		if (i - 1 < 0)break;
-		if (j - 1 < 0)break;
-		if (board[i - 1][j - 1] > 1)return FAILURE;			//if there is a figure there (king, queen, etc..)
-		board[i - 1][j - 1] = 1;
-		y--;
-	}
-	return SUCCESS;
-}
-
-int Piece::fill_OneSpotAround(int** board)
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-
-	//we set all 8 spots to 1 seperately
-	if (x + 1 < m_board_size)
-	{
-		if (board[x + 1][y] < 2)
-			board[x + 1][y] = 1;
-
-		else return FAILURE;
-
-		if (y + 1 < m_board_size)
-		{
-			if (board[x + 1][y + 1] < 2)		//if there isn't a figure place 1 
-				board[x + 1][y + 1] = 1;
-			else return FAILURE;
-		}
-	}
-
-	if (x - 1 >= 0)
-	{
-		if (board[x - 1][y] < 2)
-			board[x - 1][y] = 1;
-		else return FAILURE;
-
-		if (y - 1 >= 0)
-		{
-			if (board[x - 1][y - 1] < 2)
-				board[x - 1][y - 1] = 1;
-			else return FAILURE;
-		}
-	}
-	if (y + 1 < m_board_size)
-	{
-		if (board[x][y + 1] < 2)
-			board[x][y + 1] = 1;
-		else return FAILURE;
-
-		if (x - 1 >= 0)
-		{
-			if (board[x - 1][y + 1] < 2)
-				board[x - 1][y + 1] = 1;
-			else return FAILURE;
-		}
-	}
-	if (y - 1 >= 0)
-	{
-		if (board[x][y - 1] < 2)
-			board[x][y - 1] = 1;
-		else return FAILURE;
-
-		if (x + 1 < m_board_size)
-		{
-			if (board[x + 1][y - 1] < 2)
-				board[x + 1][y - 1] = 1;
-			else return FAILURE;
 		}
 	}
 	return SUCCESS;
 }
 
-int Piece::fill_L(int** board)									//this is a knight, but K is busy
-{
-	int x = m_position.getRow();
-	int y = m_position.getCol();
-	//we set all 8 spots to 1 seperately
-	if ((x + 1 < m_board_size) && (y + 2 < m_board_size))
-	{
-		if (board[x + 1][y + 2] < 2)							//if there isn't a figure place 1 
-			board[x + 1][y + 2] = 1;
-		else return FAILURE;
+int Piece::fillOneSpotAround(int** board) {
+	for (int i = 0; i < m_board_size; i++) {
+		for (int j = 0; j < m_board_size; j++) {
+			if (abs(i - m_position.getRow()) <= 1 && abs(j - m_position.getCol()) <= 1)
+				if (board[i][j] > Type::OCCUPIED)
+					return FAILURE;
+				else board[i][j] = Type::OCCUPIED;
+		}
 	}
-	if ((x + 1 < m_board_size) && (y - 2 >= 0))
-	{
-		if (board[x + 1][y - 2] < 2)							//if there isn't a figure place 1 
-			board[x + 1][y - 2] = 1;
-		else return FAILURE;
-	}
+	return SUCCESS;
+}
 
-	if ((x - 1 >= 0) && (y + 2 < m_board_size))
-	{
-		if (board[x - 1][y + 2] < 2)
-			board[x - 1][y + 2] = 1;
-		else return FAILURE;
-	}
-	if ((x - 1 >= 0) && (y - 2 >= 0))
-	{
-		if (board[x - 1][y - 2] < 2)
-			board[x - 1][y - 2] = 1;
-		else return FAILURE;
-	}
-	if ((x + 2 < m_board_size) && (y + 1 < m_board_size))
-	{
-		if (board[x + 2][y + 1] < 2)							//if there isn't a figure place 1 
-			board[x + 2][y + 1] = 1;
-		else return FAILURE;
-	}
-	if ((x + 2 < m_board_size) && (y - 1 >= 0))
-	{
-		if (board[x + 2][y - 1] < 2)							//if there isn't a figure place 1 
-			board[x + 2][y - 1] = 1;
-		else return FAILURE;
-	}
-
-	if ((x - 2 >= 0) && (y + 1 < m_board_size))
-	{
-		if (board[x - 2][y + 1] < 2)
-			board[x - 2][y + 1] = 1;
-		else return FAILURE;
-	}
-	if ((x - 2 >= 0) && (y - 1 >= 0))
-	{
-		if (board[x - 2][y - 1] < 2)
-			board[x - 2][y - 1] = 1;
-		else return FAILURE;
+int Piece::fill_L(int** board) {
+	for (int i = 0; i < m_board_size; i++) {
+		for (int j = 0; j < m_board_size; j++) {
+		if((abs(i-m_position.getRow()) == 2 && abs(j - m_position.getCol())==1) 
+			|| (abs(i - m_position.getRow()) == 1 && abs(j - m_position.getCol()) == 2))
+			if (board[i][j] > Type::OCCUPIED)
+				return FAILURE;
+			else board[i][j] = Type::OCCUPIED;
+		}
 	}
 }

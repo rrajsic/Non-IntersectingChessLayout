@@ -36,6 +36,7 @@ public:
 
 	int fillRowAndCol(int** board);
 	int fillDiagonals(int** board);
+	int fillOneSpotAround(int** board);
 	int fill_diagonal_DownardRight(int** board);
 	int fill_diagonal_DownardLeft(int** board);
 	int fill_diagonal_UpwardRight(int** board);
@@ -67,7 +68,7 @@ public:
 	}
 
 	int fillBoard(int** board) {
-		if (fill_OneSpotAround(board) == FAILURE) {
+		if (fillOneSpotAround(board) == FAILURE) {
 			return FAILURE;
 		}
 
@@ -97,24 +98,15 @@ public:
 	}
 
 	int fillBoard(int** board) {
-
-		/*if (fillRowAndCol(board) == FAILURE)
+		if (fillRowAndCol(board) == FAILURE)
 			return FAILURE;
-		if (fill_diagonal_DownardLeft(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_UpwardLeft(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_DownardRight(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_UpwardRight(board) == FAILURE)
-			return FAILURE;*/
 		if (fillDiagonals(board) == FAILURE)
 			return FAILURE;
+			
 		return SUCCESS;
 	}
 	void printPiece() override { std::cout << "Queen" << std::endl; }
 	const Type getType() { return m_type; }
-	
 };
 
 class Rook : public Piece, virtual public IPiece
@@ -129,7 +121,6 @@ public:
 		if (fillBoard(board) == FAILURE)
 			return FAILURE;
 
-
 		board[x][y] = static_cast<int>(Type::ROOK);
 		return SUCCESS;
 	}
@@ -141,7 +132,6 @@ public:
 	}
 	void printPiece() override { std::cout << "Rook" << std::endl; }
 	const Type getType() { return m_type; }
-
 };
 
 
@@ -162,13 +152,7 @@ public:
 	}
 	int fillBoard(int** board) {
 
-		if (fill_diagonal_DownardLeft(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_UpwardLeft(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_DownardRight(board) == FAILURE)
-			return FAILURE;
-		if (fill_diagonal_UpwardRight(board) == FAILURE)
+		if (fillDiagonals(board) == FAILURE)
 			return FAILURE;
 
 		return SUCCESS;

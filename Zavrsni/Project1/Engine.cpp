@@ -12,6 +12,7 @@
 
 
 /////////////////////////////Main engine functions////////////////////////////////////////////////
+
 bool Engine::calculateAllCombinations() {
 	bool isSuccess = false;
 	int** board = allocateBoard();
@@ -29,7 +30,6 @@ bool Engine::calculateAllCombinations() {
 }
 bool Engine::tryAllCombinations(int** board, std::vector<IPiece*> pieces, int piece_index, int max_piece_index) {
 	bool isSuccess = false;
-
 	int** temp_board = allocateBoard();
 	temp_board = copyBoard(board);
 
@@ -44,7 +44,8 @@ bool Engine::tryAllCombinations(int** board, std::vector<IPiece*> pieces, int pi
 						isSuccess = true;
 					}
 					else {
-						tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index);
+						if(tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index))
+							isSuccess=true;
 						temp_board = copyBoard(board);
 					}
 			}

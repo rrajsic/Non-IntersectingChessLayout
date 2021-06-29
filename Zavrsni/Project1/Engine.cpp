@@ -161,19 +161,19 @@ bool Engine::doesEqualRotatedBoardExist(Chessboard* board)
 	for (auto i : m_boards) {
 		if ((*board).equals((*i)))
 			return true;
-		Chessboard* tempBoard90 = new Chessboard(rotateBoard90Degrees(board->m_board), m_board_size);
+		Chessboard* tempBoard90 = new Chessboard(rotateBoard90Degrees(board->getBoard()), m_board_size);
 		if ((*tempBoard90).equals((*i))) {
 			delete tempBoard90;
 			return true;
 		}
-		Chessboard* tempBoard180 = new Chessboard(rotateBoard90Degrees(tempBoard90->m_board), m_board_size);
+		Chessboard* tempBoard180 = new Chessboard(rotateBoard90Degrees(tempBoard90->getBoard()), m_board_size);
 
 		if ((*tempBoard180).equals((*i))) {
 			delete tempBoard90;
 			delete tempBoard180;
 			return true;
 		}
-		Chessboard* tempBoard270 = new Chessboard(rotateBoard90Degrees(tempBoard180->m_board), m_board_size);
+		Chessboard* tempBoard270 = new Chessboard(rotateBoard90Degrees(tempBoard180->getBoard()), m_board_size);
 		if ((*tempBoard270).equals((*i))) {
 			delete tempBoard90;
 			delete tempBoard180;

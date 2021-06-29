@@ -4,7 +4,6 @@
 #include "IPiece.h"
 #include "Point2D.h"
 #include "Constants.h"
-#include "PieceFunctions.h"
 
 class Piece : public IPiece
 {
@@ -35,6 +34,13 @@ public:
 		return !(p1 == p2);
 	}
 
+	int fillRowAndCol(int** board);
+	int fill_diagonal_DownardRight(int** board);
+	int fill_diagonal_DownardLeft(int** board);
+	int fill_diagonal_UpwardRight(int** board);
+	int fill_diagonal_UpwardLeft(int** board);
+	int fill_OneSpotAround(int** board);
+	int fill_L(int** board);
 };
 
 
@@ -46,17 +52,25 @@ class King : virtual public Piece, virtual public IPiece
 public:
 	King(int board_size) { m_board_size = board_size; m_type = Type::KING; }
 
-	int placePiece(int x, int y, int** board) override {
+	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
 
 
-		if (fill_King(board, m_position, m_board_size) == FAILURE) {
+		if (fillBoard(board) == FAILURE) {
 			return FAILURE;
 		}
 
-		board[x][y] = 2;
+		board[x][y] = static_cast<int>(Type::KING);
 		return SUCCESS;
+	}
+
+	int fillBoard(int** board) {
+		if (fill_OneSpotAround(board) == FAILURE) {
+			return FAILURE;
+		}
+
+		else return SUCCESS;
 	}
 
 	void printPiece() override { std::cout << "King" << std::endl; }
@@ -69,18 +83,33 @@ class Queen : virtual public Piece, virtual public IPiece
 public:
 	Queen(int board_size){ m_board_size = board_size; m_type = Type::QUEEN; }
 
-	int placePiece(int x, int y, int** board) override {
+	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
 
-		if (fill_Queen(board, m_position,m_board_size) == FAILURE)
+		if (fillBoard(board) == FAILURE)
 			return FAILURE;
 
 
-		board[x][y] = 3;
+		board[x][y] = static_cast<int>(Type::QUEEN);
 		return SUCCESS;
 	}
 
+	int fillBoard(int** board) {
+
+		if (fillRowAndCol(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_DownardLeft(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_UpwardLeft(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_DownardRight(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_UpwardRight(board) == FAILURE)
+			return FAILURE;
+
+		return SUCCESS;
+	}
 	void printPiece() override { std::cout << "Queen" << std::endl; }
 	const Type getType() { return m_type; }
 	
@@ -91,15 +120,21 @@ class Rook : public Piece, virtual public IPiece
 public:
 	Rook(int board_size) { m_board_size = board_size; m_type = Type::ROOK; }
 
-	int placePiece(int x, int y, int** board) override {
+	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
 
-		if (fill_Rook(board, m_position,m_board_size) == FAILURE)
+		if (fillBoard(board) == FAILURE)
 			return FAILURE;
 
 
-		board[x][y] = 6;
+		board[x][y] = static_cast<int>(Type::ROOK);
+		return SUCCESS;
+	}
+	int fillBoard(int** board) {
+		if (fillRowAndCol(board) == FAILURE)
+			return FAILURE;
+
 		return SUCCESS;
 	}
 	void printPiece() override { std::cout << "Rook" << std::endl; }
@@ -112,15 +147,28 @@ class Bishop : public Piece, virtual public IPiece
 {
 public:
 	Bishop(int board_size) { m_board_size = board_size; m_type = Type::BISHOP; }
-	int placePiece(int x, int y, int** board) override {
+	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
 
-		if (fill_Bishop(board, m_position,m_board_size) == FAILURE)
+		if (fillBoard(board) == FAILURE)
 			return FAILURE;
 
 
-		board[x][y] = 4;
+		board[x][y] = static_cast<int>(Type::BISHOP);
+		return SUCCESS;
+	}
+	int fillBoard(int** board) {
+
+		if (fill_diagonal_DownardLeft(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_UpwardLeft(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_DownardRight(board) == FAILURE)
+			return FAILURE;
+		if (fill_diagonal_UpwardRight(board) == FAILURE)
+			return FAILURE;
+
 		return SUCCESS;
 	}
 	void printPiece() override { std::cout << "Bishop" << std::endl; }
@@ -132,20 +180,26 @@ class Knight : public Piece, virtual public IPiece
 {
 public:
 	Knight(int board_size) { m_board_size = board_size; m_type = Type::KNIGHT; }
-	int placePiece(int x, int y, int** board) override {
+	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
 
-		if (fill_Knight(board, m_position,m_board_size) == FAILURE)
+		if (fillBoard(board) == FAILURE)
 			return FAILURE;
 
 
-		board[x][y] = 5;
+		board[x][y] = static_cast<int>(Type::KNIGHT);
+		return SUCCESS;
+	}
+
+	int fillBoard(int** board) {
+		if (fill_L(board) == FAILURE)
+			return FAILURE;
+
 		return SUCCESS;
 	}
 	void printPiece() override { std::cout << "Knight" << std::endl; }
 	const Type getType() { return m_type; }
-
 };
 
 #endif

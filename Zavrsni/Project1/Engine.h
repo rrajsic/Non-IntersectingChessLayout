@@ -1,17 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-
-#include <vector>
-#include <stack>
-#include "Piece.h"
-#include "Constants.h"
-#include <algorithm>
-#include <random>
-#include<set>
-#include <unordered_set>
 #include "Chessboard.h"
-#include <sstream>
+#include "IPiece.h"
 
 class Engine
 {
@@ -23,11 +14,9 @@ private:
 	
 
 public:
-	Engine(int board_size) {
-		m_board_size = board_size;	
-	}
+	Engine(int board_size) { m_board_size = board_size;	}
 
-	//Getters and setters
+	//Getters 
 	std::vector<Chessboard*> getBoards() { return m_boards; }
 	
 	//Main engine functions
@@ -52,6 +41,6 @@ public:
 	void initializeBoard(int** board);
 	int** copyBoard(int** board);
 	void deleteBoard(int** board);
-
 };
+
 #endif

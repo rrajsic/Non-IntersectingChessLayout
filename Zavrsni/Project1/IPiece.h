@@ -10,6 +10,7 @@ public:
 	virtual int placePiece(int x, int y, int** board) = 0;
 	const virtual Type getType() = 0;
 	virtual void printPiece() = 0;
+	virtual int fillBoard(int **board) = 0;
 };
 
 #endif

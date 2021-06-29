@@ -2,12 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "BoardImageFactory.h"
+#include "Piece.h"
 #include "Engine.h"
 #include "Constants.h"
-#include "ChessboardMenu.h"
-
-/////////////////1:28
-
 using namespace sf;
 
 int size = 106;
@@ -158,7 +155,7 @@ int main(int argc, char* argv[]) {
 	Sprite sBoard(t2);
 
 	int** chessboard = new int* [board_size];
-	chessboard = bEngine.getBoards().back()->m_board;
+	chessboard = bEngine.getBoards().back()->getBoard();
 
 	int counter{ 0 };
 	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
@@ -169,7 +166,7 @@ int main(int argc, char* argv[]) {
 	
 	int *number_of_pieces_per_board = new int[number_of_boards];
 	for (int i = 0; i < number_of_boards; i++) {
-		number_of_pieces_per_board[i] = numberOfPieces(bEngine.getBoards()[i]->m_board,board_size);
+		number_of_pieces_per_board[i] = numberOfPieces(bEngine.getBoards()[i]->getBoard(),board_size);
 	}
 
 	
@@ -185,7 +182,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	for (int k = 0; k < number_of_boards; k++) {
-		loadPosition(bEngine.getBoards()[k]->m_board, f, k,board_size);
+		loadPosition(bEngine.getBoards()[k]->getBoard(), f, k,board_size);
 	}
 	
 	

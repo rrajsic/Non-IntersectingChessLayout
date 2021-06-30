@@ -21,6 +21,10 @@ public:
 	//Main engine functions
 	bool calculateAllCombinations();
 	bool tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
+
+	bool calculateFirstCombinationsForEveryPermutation();
+	bool tryFirstCombinationsForEveryPermutation(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
+
 	bool calculateFirstCombination();
 	bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces);
 	

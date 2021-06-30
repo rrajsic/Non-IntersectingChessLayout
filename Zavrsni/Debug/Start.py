@@ -126,7 +126,7 @@ def startAllCombinations():
 
     os.system("Project1.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
 
-def startCoupleCombinations():
+def startFirstCombinationsForEveryPermutation():
     board_size=board_size_option.get()[:1]
     queen_count = number_of_queens_option.get()
     king_count = number_of_kings_option.get()
@@ -136,9 +136,21 @@ def startCoupleCombinations():
 
     os.system("Project1.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
 
+def startFirstPossibleCombination():
+    board_size=board_size_option.get()[:1]
+    queen_count = number_of_queens_option.get()
+    king_count = number_of_kings_option.get()
+    rook_count = number_of_rooks_option.get()
+    bishop_count = number_of_bishops_option.get()
+    knight_count = number_of_knights_option.get()
 
-button_some_combinations = Button(window,text="Display couple of combinations",height=2,bg="#dcf7d5", font=roboto12,command = startCoupleCombinations).grid(row=9,column=4)
-button_all_combinations = Button(window, text="        Display all combinations!   ",height=2,bg="#d5e4f7",font=roboto12, command=startAllCombinations).grid(row=10,column=4,pady=10)
+    os.system("Project1.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+
+
+button_all_combinations = Button(window, text="Go 1",height=2,bg="#d5e4f7",font=roboto12, command=startAllCombinations).grid(row=9,column=4,pady=10)
+button_first_combination_for_every_permutation = Button(window,text="Go 2",height=2,bg="#dcf7d5", font=roboto12,command = startFirstCombinationsForEveryPermutation).grid(row=10,column=4)
+button_first_combination = Button(window, text="Go 3",height=2,bg="#d5e4f7",font=roboto12, command=startFirstPossibleCombination).grid(row=11,column=4,pady=10)
+
 
 
 

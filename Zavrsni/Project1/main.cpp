@@ -73,12 +73,22 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 		break;
-	case 2: 
+
+	case 2:
+		if (!bEngine.calculateFirstCombinationsForEveryPermutation()) {
+			std::cout << "Not possible." << std::endl;
+			exit(1);
+		}
+		break;
+
+	case 3: 
 		if(!bEngine.calculateFirstCombination()) {
 			std::cout << "Not possible." << std::endl;
 			exit(1);
 		}
 		break;
+	
+		
 	default: 
 		std::cout << "Error. Wrong function number recieved." << std::endl;
 		exit(1);

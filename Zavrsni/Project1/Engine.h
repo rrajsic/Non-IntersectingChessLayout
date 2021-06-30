@@ -1,8 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
-
 #include "Chessboard.h"
 #include "IPiece.h"
+
+extern int g_board_size;
 
 class Engine
 {
@@ -10,11 +11,9 @@ private:
 	std::vector<Chessboard*> m_boards;
 	std::vector<IPiece*>m_pieces;
 	std::vector<std::vector<IPiece*>> m_pieces_all_permutations;
-	int m_board_size;
-	
 
 public:
-	Engine(int board_size) { m_board_size = board_size;	}
+	Engine() {}
 
 	//Getters 
 	std::vector<Chessboard*> getBoards() { return m_boards; }

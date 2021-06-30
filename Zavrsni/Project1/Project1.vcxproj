@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="BoardImageFactory.cpp" />
+    <ClCompile Include="EnumType2.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piece.cpp" />
   </ItemGroup>
@@ -154,7 +155,6 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="BoardImageFactory.h" />
     <ClInclude Include="Chessboard.h" />
-    <ClInclude Include="Constants.h" />
     <ClInclude Include="EnumType.h" />
     <ClInclude Include="IPiece.h" />
     <ClInclude Include="MathFunctions.h" />

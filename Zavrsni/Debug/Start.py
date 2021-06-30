@@ -50,11 +50,11 @@ board_size_menu.config(font=roboto12)  # Set the dropdown menu's font
 number_of_pieces_label = Label(text="Select piece count:",font=roboto16).grid(row=1,column=0,padx=10,pady=15)
 
 
-queen_img = ImageTk.PhotoImage(Image.open("pieces/queen.png"))  
-king_img = ImageTk.PhotoImage(Image.open("pieces/king.png"))
-rook_img = ImageTk.PhotoImage(Image.open("pieces/rook.png"))
-bishop_img = ImageTk.PhotoImage(Image.open("pieces/bishop.png"))
-knight_img = ImageTk.PhotoImage(Image.open("pieces/knight.png"))
+queen_img = ImageTk.PhotoImage(Image.open("images/pieces/queen.png"))  
+king_img = ImageTk.PhotoImage(Image.open("images/pieces/king.png"))
+rook_img = ImageTk.PhotoImage(Image.open("images/pieces/rook.png"))
+bishop_img = ImageTk.PhotoImage(Image.open("images/pieces/bishop.png"))
+knight_img = ImageTk.PhotoImage(Image.open("images/pieces/knight.png"))
 
 queen_label=Label(text="Queen",font=roboto16).grid(row=2,column=0)
 queen_canvas = Canvas(window, width = 106, height = 106)

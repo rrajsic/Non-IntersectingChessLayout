@@ -1,11 +1,12 @@
 #include <cstdlib>
 #include "Point2D.h"
 #include "Piece.h"
+
 int Piece::fillRowAndCol(int** board) {
 
-	for (int i = 0; i < m_board_size; i++)
+	for (int i = 0; i < g_board_size; i++)
 	{
-		for (int j = 0; j < m_board_size; j++)
+		for (int j = 0; j < g_board_size; j++)
 		{
 			if (i == m_position.getRow())
 			{
@@ -13,11 +14,11 @@ int Piece::fillRowAndCol(int** board) {
 					return FAILURE;
 
 				else board[i][j] = Type::OCCUPIED;
-			}											//all rows are now taken
+			}											
 			if (j == m_position.getCol())
 			{
 				if (board[i][j] > Type::OCCUPIED)
-					return FAILURE;			//all columns are now taken
+					return FAILURE;			
 
 				else board[i][j] = Type::OCCUPIED;
 			}
@@ -27,8 +28,8 @@ int Piece::fillRowAndCol(int** board) {
 }
 
 int Piece::fillDiagonals(int** board) {
-	for (int i = 0; i < m_board_size; i++) {
-		for (int j = 0; j < m_board_size; j++) {
+	for (int i = 0; i < g_board_size; i++) {
+		for (int j = 0; j < g_board_size; j++) {
 			if (abs(i - m_position.getRow()) == abs(j - m_position.getCol())) {
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
@@ -40,8 +41,8 @@ int Piece::fillDiagonals(int** board) {
 }
 
 int Piece::fillOneSpotAround(int** board) {
-	for (int i = 0; i < m_board_size; i++) {
-		for (int j = 0; j < m_board_size; j++) {
+	for (int i = 0; i < g_board_size; i++) {
+		for (int j = 0; j < g_board_size; j++) {
 			if (abs(i - m_position.getRow()) <= 1 && abs(j - m_position.getCol()) <= 1)
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
@@ -52,8 +53,8 @@ int Piece::fillOneSpotAround(int** board) {
 }
 
 int Piece::fill_L(int** board) {
-	for (int i = 0; i < m_board_size; i++) {
-		for (int j = 0; j < m_board_size; j++) {
+	for (int i = 0; i < g_board_size; i++) {
+		for (int j = 0; j < g_board_size; j++) {
 		if((abs(i-m_position.getRow()) == 2 && abs(j - m_position.getCol())==1) 
 			|| (abs(i - m_position.getRow()) == 1 && abs(j - m_position.getCol()) == 2))
 			if (board[i][j] > Type::OCCUPIED)

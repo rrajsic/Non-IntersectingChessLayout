@@ -16,10 +16,8 @@ public:
 	{
 		assert(x > 0);
 		assert(y > 0);
-
 		m_x = x;
 		m_y = y;
-
 	}
 
 	void setRow(int x) { m_x = x; }
@@ -28,8 +26,4 @@ public:
 	int getRow() { return m_x; }
 	int getCol() { return m_y; }
 };
-
-
-
-
 #endif

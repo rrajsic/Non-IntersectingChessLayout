@@ -1,18 +1,20 @@
 #ifndef PIECE_H
 #define PIECE_H
+
+#define SUCCESS 0
+#define FAILURE -1
+
 #include<iostream>
 #include "IPiece.h"
 #include "Point2D.h"
-#include "Constants.h"
+
+extern int g_board_size;
 
 class Piece : public IPiece
 {
 protected:
 	Type m_type;
 	Point m_position;
-	int m_board_size;
-
-
 
 public:
 	Piece() = default;
@@ -22,8 +24,6 @@ public:
 		m_position.setRow(x);
 		m_position.setCol(y);
 	}
-
-	virtual void printPiece() = 0;
 
 	friend bool operator== (Piece& p1, Piece& p2)
 	{
@@ -45,14 +45,11 @@ public:
 	int fill_L(int** board);
 };
 
-
-
-
 class King : virtual public Piece, virtual public IPiece
 {
 
 public:
-	King(int board_size) { m_board_size = board_size; m_type = Type::KING; }
+	King() { m_type = Type::KING; }
 
 	int placePiece(int x, int y, int** board) {
 
@@ -74,8 +71,6 @@ public:
 
 		else return SUCCESS;
 	}
-
-	void printPiece() override { std::cout << "King" << std::endl; }
 	const Type getType() { return m_type; }
 	
 };
@@ -83,7 +78,7 @@ public:
 class Queen : virtual public Piece, virtual public IPiece
 {
 public:
-	Queen(int board_size){ m_board_size = board_size; m_type = Type::QUEEN; }
+	Queen(){ m_type = Type::QUEEN; }
 
 	int placePiece(int x, int y, int** board) {
 
@@ -105,14 +100,13 @@ public:
 			
 		return SUCCESS;
 	}
-	void printPiece() override { std::cout << "Queen" << std::endl; }
 	const Type getType() { return m_type; }
 };
 
 class Rook : public Piece, virtual public IPiece
 {
 public:
-	Rook(int board_size) { m_board_size = board_size; m_type = Type::ROOK; }
+	Rook() { m_type = Type::ROOK; }
 
 	int placePiece(int x, int y, int** board) {
 
@@ -124,13 +118,13 @@ public:
 		board[x][y] = static_cast<int>(Type::ROOK);
 		return SUCCESS;
 	}
+
 	int fillBoard(int** board) {
 		if (fillRowAndCol(board) == FAILURE)
 			return FAILURE;
 
 		return SUCCESS;
 	}
-	void printPiece() override { std::cout << "Rook" << std::endl; }
 	const Type getType() { return m_type; }
 };
 
@@ -138,7 +132,7 @@ public:
 class Bishop : public Piece, virtual public IPiece
 {
 public:
-	Bishop(int board_size) { m_board_size = board_size; m_type = Type::BISHOP; }
+	Bishop() { m_type = Type::BISHOP; }
 	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
@@ -150,6 +144,7 @@ public:
 		board[x][y] = static_cast<int>(Type::BISHOP);
 		return SUCCESS;
 	}
+
 	int fillBoard(int** board) {
 
 		if (fillDiagonals(board) == FAILURE)
@@ -157,15 +152,14 @@ public:
 
 		return SUCCESS;
 	}
-	void printPiece() override { std::cout << "Bishop" << std::endl; }
-	const Type getType() { return m_type; }
 
+	const Type getType() { return m_type; }
 };
 
 class Knight : public Piece, virtual public IPiece
 {
 public:
-	Knight(int board_size) { m_board_size = board_size; m_type = Type::KNIGHT; }
+	Knight() { m_type = Type::KNIGHT; }
 	int placePiece(int x, int y, int** board) {
 
 		setPosition(x, y);
@@ -184,7 +178,7 @@ public:
 
 		return SUCCESS;
 	}
-	void printPiece() override { std::cout << "Knight" << std::endl; }
+
 	const Type getType() { return m_type; }
 };
 

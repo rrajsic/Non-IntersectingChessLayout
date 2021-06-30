@@ -118,33 +118,21 @@ knight_count_menu.config(font=roboto12)  # Set the dropdown menu's font
 
 def startAllCombinations():
     board_size=board_size_option.get()[:1]
-    print ("board size:" + board_size)
     queen_count = number_of_queens_option.get()
-    print ("queens:" + queen_count)
     king_count = number_of_kings_option.get()
-    print ("kings:" + king_count)
     rook_count = number_of_rooks_option.get()
-    print ("rooks:" + rook_count)
     bishop_count = number_of_bishops_option.get()
-    print ("bishops:" + bishop_count)
     knight_count = number_of_knights_option.get()
-    print ("knights:" + knight_count)
-    
+
     os.system("Project1.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
 
 def startCoupleCombinations():
     board_size=board_size_option.get()[:1]
-    print ("board size:" + board_size)
     queen_count = number_of_queens_option.get()
-    print ("queens:" + queen_count)
     king_count = number_of_kings_option.get()
-    print ("kings:" + king_count)
     rook_count = number_of_rooks_option.get()
-    print ("rooks:" + rook_count)
     bishop_count = number_of_bishops_option.get()
-    print ("bishops:" + bishop_count)
     knight_count = number_of_knights_option.get()
-    print ("knights:" + knight_count)
 
     os.system("Project1.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
 

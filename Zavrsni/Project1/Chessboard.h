@@ -2,23 +2,22 @@
 #define CHESSBOARD_H
 
 #include<iostream>
+extern int g_board_size;
 class Chessboard
 {
 private:
 	int** m_board;
-	int m_board_size;
 
 public:
-	Chessboard(int** board,int board_size) {
+	Chessboard(int** board) {
 		m_board = board;
-		m_board_size = board_size;
 	}
 
 	int** getBoard() { return m_board; }
 	bool equals(const Chessboard& board) {
 		bool equals = true;
-		for (int i = 0; i < m_board_size; i++) {
-			for (int j = 0; j < m_board_size; j++) {
+		for (int i = 0; i < g_board_size; i++) {
+			for (int j = 0; j < g_board_size; j++) {
 				if (m_board[i][j] != board.m_board[i][j]) {
 					equals = false;
 				}
@@ -28,7 +27,7 @@ public:
 	}
 
 	~Chessboard() {
-		for (int i = 0; i < m_board_size; i++)
+		for (int i = 0; i < g_board_size; i++)
 			delete m_board[i];
 		delete m_board;
 	}

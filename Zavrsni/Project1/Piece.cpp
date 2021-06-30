@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cstdlib>
 #include "Point2D.h"
 #include "Piece.h"
@@ -13,7 +14,7 @@ int Piece::fillRowAndCol(int** board) {
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
 
-				else board[i][j] = Type::OCCUPIED;
+				board[i][j] = Type::OCCUPIED;
 			}											
 			if (j == m_position.getCol())
 			{
@@ -43,10 +44,13 @@ int Piece::fillDiagonals(int** board) {
 int Piece::fillOneSpotAround(int** board) {
 	for (int i = 0; i < g_board_size; i++) {
 		for (int j = 0; j < g_board_size; j++) {
-			if (abs(i - m_position.getRow()) <= 1 && abs(j - m_position.getCol()) <= 1)
+			if ((abs(i - m_position.getRow())) <= 1 && (abs(j - m_position.getCol())) <= 1) {
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
-				else board[i][j] = Type::OCCUPIED;
+				else 
+					board[i][j] = Type::BISHOP;
+				
+			}
 		}
 	}
 	return SUCCESS;
@@ -55,11 +59,13 @@ int Piece::fillOneSpotAround(int** board) {
 int Piece::fill_L(int** board) {
 	for (int i = 0; i < g_board_size; i++) {
 		for (int j = 0; j < g_board_size; j++) {
-		if((abs(i-m_position.getRow()) == 2 && abs(j - m_position.getCol())==1) 
-			|| (abs(i - m_position.getRow()) == 1 && abs(j - m_position.getCol()) == 2))
-			if (board[i][j] > Type::OCCUPIED)
-				return FAILURE;
-			else board[i][j] = Type::OCCUPIED;
+			if ((abs(i - m_position.getRow()) == 2 && abs(j - m_position.getCol()) == 1)
+				|| (abs(i - m_position.getRow()) == 1 && abs(j - m_position.getCol()) == 2)) {
+				if (board[i][j] > Type::OCCUPIED)
+					return FAILURE;
+				else board[i][j] = Type::OCCUPIED;
+			}
 		}
 	}
+	return SUCCESS;
 }

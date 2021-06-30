@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "BoardImageFactory.h"
-#include "Piece.h"
+#include "Pieces.h"
 #include "Engine.h"
 
 using namespace sf;
@@ -23,16 +23,6 @@ void loadPosition(int **board, Sprite** f,int board_number) {
 			k++;
 		}
 	}
-}
-
-int numberOfPieces(int** board) {
-	int counter(0);
-	for (int i = 0; i < g_board_size; i++) {
-		for (int j = 0; j < g_board_size; j++) {
-			if (board[i][j] != 0)counter++;
-		}
-	}
-	return counter;
 }
 
 int main(int argc, char* argv[]) {
@@ -56,7 +46,7 @@ int main(int argc, char* argv[]) {
 	
 	Engine bEngine = Engine();
 
-	std::vector<IPiece*>pieces;
+	std::vector<Piece*>pieces;
 
 	for (int i = 0; i < queen_count; i++) {
 		bEngine.pushPiece(new Queen());
@@ -119,7 +109,7 @@ int main(int argc, char* argv[]) {
 	
 	int *number_of_pieces_per_board = new int[number_of_boards];
 	for (int i = 0; i < number_of_boards; i++) {
-		number_of_pieces_per_board[i] = numberOfPieces(bEngine.getBoards()[i]->getBoard());
+		number_of_pieces_per_board[i] = bEngine.countOccupied(bEngine.getBoards()[i]->getBoard());
 	}
 
 	Sprite** f = new Sprite*[number_of_boards];

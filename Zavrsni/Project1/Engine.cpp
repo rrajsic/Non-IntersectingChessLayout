@@ -1,7 +1,6 @@
 #include <vector>
 #include <algorithm>
-#include <unordered_set>
-#include "Piece.h"
+#include "Pieces.h"
 #include "Chessboard.h"
 #include "MathFunctions.h"
 #include "Engine.h"
@@ -11,23 +10,27 @@
 
 bool Engine::calculateAllCombinations() {
 	bool isSuccess = false;
-	int** board = allocateBoard();
-	initializeBoard(board);
+	
 	int counter(1);
 	int num_of_permutations = m_pieces_all_permutations.size();
 	while (!m_pieces_all_permutations.empty()) {
-		std::vector<IPiece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
+		int** board = allocateBoard();
+		initializeBoard(board);
+		std::vector<Piece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 		if (tryAllCombinations(board, temp_pieces, 0, temp_pieces.size() - 1))isSuccess = true;
 		m_pieces_all_permutations.pop_back();
+		
 		counter++;
+		deleteBoard(board);
 	}
 	return isSuccess;
 }
 
-bool Engine::tryAllCombinations(int** board, std::vector<IPiece*> pieces, int piece_index, int max_piece_index) {
+bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index) {
 	bool isSuccess = false;
 	int** temp_board = allocateBoard();
+	initializeBoard(temp_board);
 	temp_board = copyBoard(board);
 
 	for (int i = 0; i < g_board_size; i++) {
@@ -35,20 +38,27 @@ bool Engine::tryAllCombinations(int** board, std::vector<IPiece*> pieces, int pi
 			if (temp_board[i][j] == 0) {
 				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS)
 					if (piece_index == max_piece_index) {
-						if (!doesEqualRotatedBoardExist(new Chessboard(temp_board, g_board_size)))
-							m_boards.push_back(new Chessboard(copyBoard(temp_board), g_board_size));
-						temp_board = copyBoard(board);
+						Chessboard* success_board = new Chessboard(temp_board);
+
+						if (!doesEqualRotatedBoardExist(success_board)) 		
+							m_boards.push_back(success_board);
+						
 						isSuccess = true;
+						temp_board = copyBoard(board);
 					}
 					else {
-						if(tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index))
-							isSuccess=true;
+						if (tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index)) {
+							isSuccess = true;
+						
+						}
 						temp_board = copyBoard(board);
 					}
 			}
+			temp_board = copyBoard(board);
 		}
 	}
-	deleteBoard(temp_board);
+	
+	
 	return isSuccess;
 }
 
@@ -60,7 +70,7 @@ bool Engine::calculateShuffleCombinations() {
 	int num_of_permutations = m_pieces_all_permutations.size();
 	while (!m_pieces_all_permutations.empty()) {
 
-		std::vector<IPiece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
+		std::vector<Piece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 		if (saveFirstPossibleCombination(board, temp_pieces))isSuccess = true;
 		m_pieces_all_permutations.pop_back();
@@ -69,7 +79,7 @@ bool Engine::calculateShuffleCombinations() {
 	return isSuccess;
 }
 
-bool Engine::saveFirstPossibleCombination(int** board, std::vector<IPiece*> pieces) {
+bool Engine::saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces) {
 	bool isSuccess = false;
 
 	int** temp_board = allocateBoard();
@@ -81,65 +91,44 @@ bool Engine::saveFirstPossibleCombination(int** board, std::vector<IPiece*> piec
 				if (pieces.back()->placePiece(i, j, temp_board) == SUCCESS) {
 					pieces.pop_back();
 					if (pieces.empty()) {
-						if (!doesEqualRotatedBoardExist(new Chessboard(temp_board, g_board_size)))
-							m_boards.push_back(new Chessboard(copyBoard(temp_board), g_board_size));
+						if (!doesEqualRotatedBoardExist(new Chessboard(temp_board)))
+							m_boards.push_back(new Chessboard(copyBoard(temp_board)));
 						return true;
 					}
 					else {
 						saveFirstPossibleCombination(temp_board, pieces);
 					}
+					temp_board = copyBoard(board);
 				}
 			}
+			temp_board = copyBoard(board);
 		}
 	}
-	deleteBoard(temp_board);
 	return false;
 }
 
 ////////////////////////////Vector Functions/////////////////////////////////////////////////
 
-void Engine::pushPiece(IPiece* piece) {
+void Engine::pushPiece(Piece* piece) {
 	m_pieces.push_back(piece);
 }
 
 void Engine::setVectors() {
-	
-	/*
-	std::vector<Type> types;
-	for (auto i : m_pieces) {
-		types.push_back(i->getType());
-	}
 	int counter(0);
-	do {
-			counter++;
-	} while (std::next_permutation(types.begin(), types.end(), [](IPiece* p1, IPiece* p2) {
-		return p1->getType() == p2->getType();
-		}));
-		*/
-	int counter(0);
-	std::sort(m_pieces.begin(), m_pieces.end(),[](IPiece*& p1, IPiece*& p2) {
-		return p1->getType() <= p2->getType();
+	std::sort(m_pieces.begin(), m_pieces.end(),[](Piece*& p1, Piece*& p2) {
+		return p1->getType() < p2->getType();
 		});
 	do {
-		counter++;
+
 		if (!doesVectorExist(m_pieces))
 			m_pieces_all_permutations.push_back(deepCopyVector(m_pieces));
-	} while (std::next_permutation(begin(m_pieces), end(m_pieces), [](IPiece *&p1,IPiece* &p2) {
+	} while (std::next_permutation(begin(m_pieces), end(m_pieces), [](Piece *&p1,Piece* &p2) {
 		return p1->getType() < p2->getType();
 		}));
-
-	for (auto i : m_pieces_all_permutations) {
-		for (auto j : i) {
-			std::cout << j->getType() << std::endl;
-		}
-		std::cout << std::endl;
-	}
-
-	std::cout << "COUNTER: " << counter << "\n";
 }
 
-std::vector<IPiece*> Engine::deepCopyVector(std::vector<IPiece*> pieces) {
-	std::vector<IPiece*> temp;
+std::vector<Piece*> Engine::deepCopyVector(std::vector<Piece*> pieces) {
+	std::vector<Piece*> temp;
 	for (auto i : pieces) {
 		switch (i->getType()) {
 		case Type::KING:
@@ -165,7 +154,7 @@ std::vector<IPiece*> Engine::deepCopyVector(std::vector<IPiece*> pieces) {
 	return temp;
 }
 
-bool Engine::doesVectorExist(std::vector<IPiece*> v) {
+bool Engine::doesVectorExist(std::vector<Piece*> v) {
 	for (auto i : m_pieces_all_permutations)
 	{
 		if (areVectorsEqual(i, v))return true;
@@ -173,7 +162,7 @@ bool Engine::doesVectorExist(std::vector<IPiece*> v) {
 	return false;
 }
 
-bool Engine::areVectorsEqual(std::vector<IPiece*> v1, std::vector<IPiece*> v2) {
+bool Engine::areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2) {
 	for (int i = 0; i < v1.size(); i++) {
 		if (v1[i]->getType() != v2[i]->getType())return false;
 	}
@@ -186,19 +175,19 @@ bool Engine::doesEqualRotatedBoardExist(Chessboard* board)
 	for (auto i : m_boards) {
 		if ((*board).equals((*i)))
 			return true;
-		Chessboard* tempBoard90 = new Chessboard(rotateBoard90Degrees(board->getBoard()), g_board_size);
+		Chessboard* tempBoard90 = new Chessboard(rotateBoard90Degrees(board->getBoard()));
 		if ((*tempBoard90).equals((*i))) {
 			delete tempBoard90;
 			return true;
 		}
-		Chessboard* tempBoard180 = new Chessboard(rotateBoard90Degrees(tempBoard90->getBoard()), g_board_size);
+		Chessboard* tempBoard180 = new Chessboard(rotateBoard90Degrees(tempBoard90->getBoard()));
 
 		if ((*tempBoard180).equals((*i))) {
 			delete tempBoard90;
 			delete tempBoard180;
 			return true;
 		}
-		Chessboard* tempBoard270 = new Chessboard(rotateBoard90Degrees(tempBoard180->getBoard()), g_board_size);
+		Chessboard* tempBoard270 = new Chessboard(rotateBoard90Degrees(tempBoard180->getBoard()));
 		if ((*tempBoard270).equals((*i))) {
 			delete tempBoard90;
 			delete tempBoard180;
@@ -255,6 +244,16 @@ int** Engine::copyBoard(int** board) {
 		}
 	}
 	return temp;
+}
+
+int Engine::countOccupied(int** board) {
+	int counter(0);
+	for (int i = 0; i < g_board_size; i++) {
+		for (int j = 0; j < g_board_size; j++) {
+			if (board[i][j] != 0)counter++;
+		}
+	}
+	return counter;
 }
 
 void Engine::deleteBoard(int** board) {

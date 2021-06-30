@@ -48,7 +48,7 @@ int Piece::fillOneSpotAround(int** board) {
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
 				else 
-					board[i][j] = Type::BISHOP;
+					board[i][j] = Type::OCCUPIED;
 				
 			}
 		}

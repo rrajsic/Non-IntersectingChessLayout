@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 		}
 		break;
 	case 2: 
-		if(!bEngine.calculateShuffleCombinations()) {
+		if(!bEngine.calculateFirstCombination()) {
 			std::cout << "Not possible." << std::endl;
 			exit(1);
 		}

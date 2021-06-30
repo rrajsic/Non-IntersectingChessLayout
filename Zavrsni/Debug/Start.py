@@ -3,6 +3,7 @@ from tkinter.constants import NE, NW
 from PIL import ImageTk,Image 
 import tkinter.font as tkFont
 import os 
+
 BOARD_SIZE_OPTIONS = [
 "3x3",
 "4x4",
@@ -29,13 +30,10 @@ window.title("Chessboard Menu")
 window.minsize(600,600)
 window.resizable(width = FALSE, height = FALSE)
 
-
 roboto16=tkFont.Font(family="Roboto", size=16)
 roboto12=tkFont.Font(family="Roboto",size=12)
 
 board_size_label = Label(text="Select board size: ",font=roboto16).grid(row=0,column=0)
-
-
 
 board_size_option = StringVar(window)
 board_size_option.set(BOARD_SIZE_OPTIONS[0]) # default value
@@ -92,26 +90,26 @@ number_of_rooks_select.config(font=roboto16)
 rook_count_menu = window.nametowidget(number_of_rooks_select.menuname)
 rook_count_menu.config(font=roboto12)  # Set the dropdown menu's font
 
-bishop_label=Label(text="Bishop",font=roboto16).grid(row=2,column=4)
+bishop_label=Label(text="Bishop",font=roboto16).grid(row=2,column=5)
 bishop_canvas = Canvas(window, width = 106, height = 106)
 bishop_canvas.create_image(60,50,image=bishop_img)
-bishop_canvas.grid(row=4,column=4)
+bishop_canvas.grid(row=4,column=5)
 number_of_bishops_option = StringVar(window)
 number_of_bishops_option.set(PIECE_OPTIONS[0]) #default value
 number_of_bishops_select= OptionMenu(window, number_of_bishops_option, *PIECE_OPTIONS)
-number_of_bishops_select.grid(row=4,column=5,padx=20)
+number_of_bishops_select.grid(row=4,column=6,padx=20)
 number_of_bishops_select.config(font=roboto16)
 bishop_count_menu = window.nametowidget(number_of_bishops_select.menuname)
 bishop_count_menu.config(font=roboto12)  # Set the dropdown menu's font
 
-knight_label=Label(text="Knight",font=roboto16).grid(row=5,column=4)
+knight_label=Label(text="Knight",font=roboto16).grid(row=5,column=5)
 knight_canvas = Canvas(window, width = 106, height = 106)
 knight_canvas.create_image(60,50,image=knight_img)
-knight_canvas.grid(row=6,column=4)
+knight_canvas.grid(row=6,column=5)
 number_of_knights_option = StringVar(window)
 number_of_knights_option.set(PIECE_OPTIONS[0]) #default value
 number_of_knights_select= OptionMenu(window, number_of_knights_option, *PIECE_OPTIONS)
-number_of_knights_select.grid(row=6,column=5)
+number_of_knights_select.grid(row=6,column=6)
 number_of_knights_select.config(font=roboto16)
 knight_count_menu = window.nametowidget(number_of_knights_select.menuname)
 knight_count_menu.config(font=roboto12)  # Set the dropdown menu's font
@@ -147,10 +145,13 @@ def startFirstPossibleCombination():
     os.system("Project1.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
 
 
-button_all_combinations = Button(window, text="Go 1",height=2,bg="#d5e4f7",font=roboto12, command=startAllCombinations).grid(row=9,column=4,pady=10)
-button_first_combination_for_every_permutation = Button(window,text="Go 2",height=2,bg="#dcf7d5", font=roboto12,command = startFirstCombinationsForEveryPermutation).grid(row=10,column=4)
-button_first_combination = Button(window, text="Go 3",height=2,bg="#d5e4f7",font=roboto12, command=startFirstPossibleCombination).grid(row=11,column=4,pady=10)
+button_all_combinations = Button(window, text="View All",height=2,width=12,bg="#d5e4f7",font=roboto16, command=startAllCombinations).grid(row=9,column=5,pady=10)
+button_first_combination_for_every_permutation = Button(window,text="View Some",height=2,width=12,bg="#dcf7d5", font=roboto16,command = startFirstCombinationsForEveryPermutation).grid(row=10,column=5)
+button_first_combination = Button(window, text="View One",height=2,width=12,bg="#ffcda1",font=roboto16, command=startFirstPossibleCombination).grid(row=11,column=5,pady=10)
 
+label_all_combinations = Label(window,text ="               Display all possible combinations -",font=roboto12).grid(row=9,column=0,columnspan=5,padx=10)
+label_first_combination_for_every_permutation = Label(window,text ="Display combination for every permutation -",font=roboto12).grid(row=10,column=0,columnspan=5,padx=10)
+label_first_combination = Label(window,text ="              Display first possible combination -",font=roboto12).grid(row=11,column=0,columnspan=5,padx=10)
 
 
 

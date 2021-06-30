@@ -50,17 +50,16 @@ bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int pie
 						Chessboard* success_board = new Chessboard(temp_board);
 						if (!doesEqualRotatedBoardExist(std::move(success_board)))
 							m_boards.emplace_back(std::move(success_board));
-						return true;
+						isSuccess = true;
 					}
 					else {
 						if (tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index)) {
 							isSuccess = true;
-
 						}
 						temp_board = copyBoard(board);
 					}
 				}
-				else temp_board = copyBoard(board);
+				temp_board = copyBoard(board);
 			}
 		}
 	}

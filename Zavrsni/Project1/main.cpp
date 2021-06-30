@@ -3,6 +3,7 @@
 #include <time.h>
 #include "BoardImageFactory.h"
 #include "Pieces.h"
+#include "EnumFunctions.h"
 #include "Engine.h"
 
 using namespace sf;
@@ -10,20 +11,7 @@ using namespace sf;
 int size = 106;
 int g_board_size;
 
-void loadPosition(int **board, Sprite** f,int board_number) {
-	int k = 0;
-	for (int i = 0; i < g_board_size; i++) {
-		for (int j = 0; j < g_board_size; j++) {
-			int n = board[i][j];
-			if (!n) continue;
-			int x = abs(n) - 1;
-			int y = n > 0 ? 1 : 0;
-			f[board_number][k].setTextureRect(IntRect(size * x, size * y, size, size));
-			f[board_number][k].setPosition(size * j, size * i);
-			k++;
-		}
-	}
-}
+void loadPosition(int** board, Sprite** f, int board_number);
 
 int main(int argc, char* argv[]) {
 
@@ -33,6 +21,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	const int functionCall = x[1];
+	const Functions function = static_cast<Functions>(x[1]);
 	g_board_size = x[2];
 	const int queen_count = x[3];
 	const int king_count = x[4];
@@ -66,35 +55,12 @@ int main(int argc, char* argv[]) {
 
 	bEngine.setVectors();
 
-	switch (x[1]) {
-	case 1:
-		if (!bEngine.calculateAllCombinations()) {
-			std::cout << "Not possible." << std::endl;
-			exit(1);
-		}
-		break;
-
-	case 2:
-		if (!bEngine.calculateFirstCombinationsForEveryPermutation()) {
-			std::cout << "Not possible." << std::endl;
-			exit(1);
-		}
-		break;
-
-	case 3: 
-		if(!bEngine.calculateFirstCombination()) {
-			std::cout << "Not possible." << std::endl;
-			exit(1);
-		}
-		break;
-	
-		
-	default: 
-		std::cout << "Error. Wrong function number recieved." << std::endl;
-		exit(1);
+	if (bEngine.calculateAllCombinations(function) == false) {
+		std::cout << "Not possible." << std::endl;
+		exit(EXIT_FAILURE);
 	}
 	
-	int number_of_boards = bEngine.getBoards().size();
+	int board_count = bEngine.getBoards().size();
 
 	RenderWindow window(VideoMode(g_board_size * chess_square_size, g_board_size * chess_square_size), "Chess");
 
@@ -113,27 +79,27 @@ int main(int argc, char* argv[]) {
 	int counter{ 0 };
 	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
 
-	std::cout << "NUMBER OF COMBINATIONS: " << counter << "\n";
+	std::cout << "Number of unique combinations: " << counter << "\n\n";
 	std::cout << "Press space to see next combination" << "\n";
-	std::cout << "Press backspace to see previous combination" << "\n";
+	std::cout << "Press backspace to see previous combination" << "\n\n";
 	
-	int *number_of_pieces_per_board = new int[number_of_boards];
-	for (int i = 0; i < number_of_boards; i++) {
-		number_of_pieces_per_board[i] = bEngine.countOccupied(bEngine.getBoards()[i]->getBoard());
+	int *pieces_count_per_board = new int[board_count];
+	for (int i = 0; i < board_count; i++) {
+		pieces_count_per_board[i] = bEngine.countOccupied(bEngine.getBoards()[i]->getBoard());
 	}
 
-	Sprite** f = new Sprite*[number_of_boards];
-	for (int i = 0; i < number_of_boards; i++) {
-		f[i] = new Sprite[number_of_pieces_per_board[i]];
+	Sprite** f = new Sprite*[board_count];
+	for (int i = 0; i < board_count; i++) {
+		f[i] = new Sprite[pieces_count_per_board[i]];
 	}
 	
-	for (int i = 0; i < number_of_boards; i++) {
-		for (int j = 0; j < number_of_pieces_per_board[i]; j++) {
+	for (int i = 0; i < board_count; i++) {
+		for (int j = 0; j < pieces_count_per_board[i]; j++) {
 			f[i][j].setTexture(t1);
 		}
 	}
 	
-	for (int k = 0; k < number_of_boards; k++) {
+	for (int k = 0; k < board_count; k++) {
 		loadPosition(bEngine.getBoards()[k]->getBoard(), f, k);
 	}
 	
@@ -152,7 +118,7 @@ int main(int argc, char* argv[]) {
 
 			if (e.type == Event::KeyPressed) {
 				if (e.key.code == Keyboard::Space) {
-					if(board_number < number_of_boards-1)board_number++;
+					if(board_number < board_count-1)board_number++;
 				}
 				if (e.key.code == Keyboard::BackSpace) {
 					if(board_number>0)board_number--;
@@ -160,10 +126,9 @@ int main(int argc, char* argv[]) {
 			}
 
 		}
-		////////DRAW///////////////////////
 		window.clear();
 		window.draw(sBoard);
-		for (int i = 0; i < number_of_pieces_per_board[board_number]; i++)window.draw(f[board_number][i]);
+		for (int i = 0; i < pieces_count_per_board[board_number]; i++)window.draw(f[board_number][i]);
 
 		window.display();
 		
@@ -172,6 +137,21 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < g_board_size; i++) {
 		delete chessboard[i];
 	}
-	delete chessboard;
-	delete x;
+	delete [] chessboard;
+	delete [] x;
+}
+
+void loadPosition(int** board, Sprite** f, int board_number) {
+	int k = 0;
+	for (int i = 0; i < g_board_size; i++) {
+		for (int j = 0; j < g_board_size; j++) {
+			int n = board[i][j];
+			if (!n) continue;
+			int x = abs(n) - 1;
+			int y = n > 0 ? 1 : 0;
+			f[board_number][k].setTextureRect(IntRect(size * x, size * y, size, size));
+			f[board_number][k].setPosition(size * j, size * i);
+			k++;
+		}
+	}
 }

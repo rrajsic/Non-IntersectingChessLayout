@@ -1,3 +1,3 @@
 ﻿  Engine.cpp
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(228,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(159,20): warning C4018: '<': signed/unsigned mismatch
   Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\Project1.exe

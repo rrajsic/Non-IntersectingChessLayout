@@ -1,7 +1,6 @@
 #ifndef CHESSBOARD_H
 #define CHESSBOARD_H
 
-#include<iostream>
 extern int g_board_size;
 class Chessboard
 {

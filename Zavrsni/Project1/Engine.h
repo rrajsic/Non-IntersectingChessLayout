@@ -19,13 +19,8 @@ public:
 	std::vector<Chessboard*> getBoards() { return m_boards; }
 	
 	//Main engine functions
-	bool calculateAllCombinations();
+	bool calculateAllCombinations(const Functions function);
 	bool tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
-
-	bool calculateFirstCombinationsForEveryPermutation();
-	bool tryFirstCombinationsForEveryPermutation(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
-
-	bool calculateFirstCombination();
 	bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces);
 	
 	//Vector Functions

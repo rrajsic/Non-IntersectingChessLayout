@@ -50,7 +50,7 @@
     <ClInclude Include="BoardImageFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathFunctions.h">
+    <ClInclude Include="EnumFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,15 +9,13 @@ int Piece::fillRowAndCol(int** board) {
 	{
 		for (int j = 0; j < g_board_size; j++)
 		{
-			if (i == m_position.getRow())
-			{
+			if (i == m_position.getRow()){
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;
 
 				board[i][j] = Type::OCCUPIED;
 			}											
-			if (j == m_position.getCol())
-			{
+			if (j == m_position.getCol()){
 				if (board[i][j] > Type::OCCUPIED)
 					return FAILURE;			
 

@@ -1,7 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-
 #include<iostream>
 #include "Piece.h"
 #include "Point2D.h"

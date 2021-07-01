@@ -132,7 +132,7 @@ def startAllCombinations():
 
     if pieces_inputed:
 
-        output = os.system("Project1.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessCombinationEngine.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output == -1:
             output_frame.destroy()
@@ -163,7 +163,7 @@ def startFirstCombinationsForEveryPermutation():
 
     if pieces_inputed:
 
-        output = os.system("Project1.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessCombinationEngine.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output == -1:
             output_frame.destroy()
@@ -194,7 +194,7 @@ def startFirstPossibleCombination():
 
     if pieces_inputed:
 
-        output = os.system("Project1.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessCombinationEngine.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output == -1:
             output_frame.destroy()

@@ -4,6 +4,7 @@
 #include "BoardImageFactory.h"
 #include "Pieces.h"
 #include "EnumFunctions.h"
+#include "EnumCombinations.h"
 #include "Engine.h"
 
 using namespace sf;
@@ -56,8 +57,7 @@ int main(int argc, char* argv[]) {
 	bEngine.setVectors();
 
 	if (bEngine.calculateAllCombinations(function) == false) {
-		std::cout << "Not possible." << std::endl;
-		exit(EXIT_FAILURE);
+		return FAILURE;
 	}
 	
 	int board_count = bEngine.getBoards().size();
@@ -122,6 +122,14 @@ int main(int argc, char* argv[]) {
 				}
 				if (e.key.code == Keyboard::BackSpace) {
 					if(board_number>0)board_number--;
+				}
+				if (e.key.code == Keyboard::Enter) {
+					for (int i = 0; i < g_board_size; i++) {
+						delete chessboard[i];
+					}
+					delete[] chessboard;
+					delete[] x;
+					return counter;
 				}
 			}
 

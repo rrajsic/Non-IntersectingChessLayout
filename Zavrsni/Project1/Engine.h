@@ -20,7 +20,7 @@ public:
 	
 	//Main engine functions
 	bool calculateAllCombinations(const Functions function);
-	bool tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
+	bool tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations);
 	bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
 	//bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces);
 	

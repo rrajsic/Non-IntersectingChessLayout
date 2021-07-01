@@ -1,3 +1,6 @@
-﻿  Engine.cpp
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(195,20): warning C4018: '<': signed/unsigned mismatch
+﻿  main.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardImageFactory.h(9,2): warning C4091: 'static ': ignored on left of 'BoardImageFactory' when no variable is declared
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(81,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(162,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(162,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\Project1.exe

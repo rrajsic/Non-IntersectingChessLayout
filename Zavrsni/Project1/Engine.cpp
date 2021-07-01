@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "Pieces.h"
 #include "EnumFunctions.h"
+#include "EnumBoard.h"
+#include "EnumCombinations.h"
 #include "Chessboard.h"
 #include "Engine.h"
 
@@ -20,13 +22,16 @@ bool Engine::calculateAllCombinations(const Functions function) {
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 		switch (function) {
 		case Functions::DISPLAY_ALL_COMBINATIONS:
-				if (tryAllCombinations(board, temp_pieces, 0, temp_pieces.size() - 1))isSuccess = true;
-				break;
+			if (tryAllCombinations(board, temp_pieces, 0, temp_pieces.size(),Combinations::EVERY))isSuccess = true;
+			break;
 		case Functions::DISPLAY_FIRST_COMBINATION_OF_EVERY_PERMUTATION: 
-				if (saveFirstPossibleCombination(board, temp_pieces, 0, temp_pieces.size() - 1))isSuccess = true;
-				break;
+			if (tryAllCombinations(board, temp_pieces, 0, temp_pieces.size(),Combinations::FIRST))isSuccess = true;
+			break;
 		case Functions::DISPLAY_FIRST_POSSIBLE_COMBINATION: 
-				if (saveFirstPossibleCombination(board, temp_pieces, 0, temp_pieces.size() - 1))return true;
+			if (tryAllCombinations(board, temp_pieces, 0, temp_pieces.size(), Combinations::FIRST))return true;
+			break;
+		default:
+			return -2;
 		}	
 		m_pieces_all_permutations.pop_back();
 		
@@ -36,7 +41,38 @@ bool Engine::calculateAllCombinations(const Functions function) {
 	return isSuccess;
 }
 
-bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index) {
+//bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index) {
+//	bool isSuccess = false;
+//	int** temp_board = allocateBoard();
+//	initializeBoard(temp_board);
+//	temp_board = copyBoard(board);
+//
+//	for (int i = 0; i < g_board_size; i++) {
+//		for (int j = 0; j < g_board_size; j++) {
+//			if (temp_board[i][j] == 0) {
+//				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
+//					if (piece_index == max_piece_index) {
+//						Chessboard* success_board = new Chessboard(temp_board);
+//						if (!doesEqualRotatedBoardExist(std::move(success_board)))
+//							m_boards.emplace_back(std::move(success_board));
+//						isSuccess = true;
+//					}
+//					else {
+//						if (tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index)) {
+//							isSuccess = true;
+//						}
+//						temp_board = copyBoard(board);
+//					}
+//				}
+//				temp_board = copyBoard(board);
+//			}
+//		}
+//	}
+//	
+//	deleteBoard(temp_board);
+//	return isSuccess;
+//}
+bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations) {
 	bool isSuccess = false;
 	int** temp_board = allocateBoard();
 	initializeBoard(temp_board);
@@ -46,15 +82,23 @@ bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int pie
 		for (int j = 0; j < g_board_size; j++) {
 			if (temp_board[i][j] == 0) {
 				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
-					if (piece_index == max_piece_index) {
+					if (piece_index == (piece_count-1)) {
 						Chessboard* success_board = new Chessboard(temp_board);
 						if (!doesEqualRotatedBoardExist(std::move(success_board)))
 							m_boards.emplace_back(std::move(success_board));
+
 						isSuccess = true;
+						if (combinations == Combinations::FIRST)
+							return isSuccess;
 					}
 					else {
-						if (tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index)) {
+						if (tryAllCombinations(temp_board, pieces, piece_index + 1, piece_count, combinations)) {
 							isSuccess = true;
+							if (combinations == Combinations::FIRST)
+								return isSuccess;
+						}
+						else {
+							tryAllCombinations(temp_board, pieces, piece_index, piece_count,combinations);
 						}
 						temp_board = copyBoard(board);
 					}
@@ -63,44 +107,42 @@ bool Engine::tryAllCombinations(int** board, std::vector<Piece*> pieces, int pie
 			}
 		}
 	}
-	
+
 	deleteBoard(temp_board);
 	return isSuccess;
 }
-bool Engine::saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index) {
-	bool isSuccess = false;
-	int** temp_board = allocateBoard();
-	initializeBoard(temp_board);
-	temp_board = copyBoard(board);
-
-	int index = piece_index;
-
-	for (int i = 0; i < g_board_size; i++) {
-		for (int j = 0; j < g_board_size; j++) {
-			if (temp_board[i][j] == 0) {
-				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
-					if (piece_index == max_piece_index) {
-						Chessboard* success_board = new Chessboard(temp_board);
-						if (!doesEqualRotatedBoardExist(std::move(success_board)))
-							m_boards.emplace_back(std::move(success_board));
-						return true;
-					}
-					else {
-						if (tryAllCombinations(temp_board, pieces, index + 1, max_piece_index))return true;
-						else {
-							tryAllCombinations(temp_board, pieces, index, max_piece_index);
-						}
-						
-						temp_board = copyBoard(board);
-					}
-				}
-				temp_board = copyBoard(board);
-			}
-		}
-	}
-	deleteBoard(temp_board);
-	return false;
-}
+//bool Engine::saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index) {
+//	bool isSuccess = false;
+//	int** temp_board = allocateBoard();
+//	initializeBoard(temp_board);
+//	temp_board = copyBoard(board);
+//
+//	for (int i = 0; i < g_board_size; i++) {
+//		for (int j = 0; j < g_board_size; j++) {
+//			if (temp_board[i][j] == 0) {
+//				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
+//					if (piece_index == max_piece_index) {
+//						Chessboard* success_board = new Chessboard(temp_board);
+//						if (!doesEqualRotatedBoardExist(std::move(success_board)))
+//							m_boards.emplace_back(std::move(success_board));
+//						return true;
+//					}
+//					else {
+//						if (tryAllCombinations(temp_board, pieces, piece_index + 1, max_piece_index))return true;
+//						else {
+//							tryAllCombinations(temp_board, pieces, piece_index, max_piece_index);
+//						}
+//						
+//						temp_board = copyBoard(board);
+//					}
+//				}
+//				temp_board = copyBoard(board);
+//			}
+//		}
+//	}
+//	deleteBoard(temp_board);
+//	return false;
+//}
 
 //bool Engine::saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces) {
 //	bool isSuccess = false;

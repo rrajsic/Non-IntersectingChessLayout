@@ -13,6 +13,7 @@ public:
 	}
 
 	int** getBoard() const { return m_board; }
+
 	bool equals(const Chessboard& board) {
 		bool equals = true;
 		for (int i = 0; i < g_board_size; i++) {
@@ -23,6 +24,21 @@ public:
 			}
 		}
 		return equals;
+	}
+	static bool equals(Chessboard* testBoard, std::vector<Chessboard*> boards) {
+		bool board_equals = false;
+		for (auto board : boards) {
+			bool field_equals = true;
+			for (int i = 0; i < g_board_size; i++) {
+				for (int j = 0; j < g_board_size; j++) {
+					if (testBoard->getBoard()[i][j] != board->getBoard()[i][j]){
+						field_equals = false;
+						}
+				}
+			}
+			if (field_equals)board_equals = true;
+		}
+		return board_equals;
 	}
 
 	~Chessboard() {

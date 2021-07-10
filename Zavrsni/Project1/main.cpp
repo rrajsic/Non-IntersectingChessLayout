@@ -54,9 +54,9 @@ int main(int argc, char* argv[]) {
 		bEngine.pushPiece(new Knight());
 	}
 
-	bEngine.setVectors();
+	bEngine.setPiecesPermutations();
 
-	if (bEngine.calculateAllCombinations(function) == false) {
+	if (bEngine.calculatePossibleLayouts(function) == false) {
 		return FAILURE;
 	}
 	
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
 	int counter{ 0 };
 	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
 
-	std::cout << "Number of unique combinations: " << counter << "\n\n";
+	std::cout << "Number of fundemental combinations: " << counter << "\n\n";
 	std::cout << "Press space to see next combination" << "\n";
 	std::cout << "Press backspace to see previous combination" << "\n\n";
 	

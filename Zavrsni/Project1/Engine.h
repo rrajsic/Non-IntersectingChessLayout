@@ -19,14 +19,12 @@ public:
 	std::vector<Chessboard*> getBoards() { return m_boards; }
 	
 	//Main engine functions
-	bool calculateAllCombinations(const Functions function);
-	bool tryAllCombinations(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations);
-	bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces, int piece_index, int max_piece_index);
-	//bool saveFirstPossibleCombination(int** board, std::vector<Piece*> pieces);
+	bool calculatePossibleLayouts(const Functions function);
+	bool saveLayouts(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations);
 	
 	//Vector Functions
 	void pushPiece(Piece* piece);
-	void setVectors();
+	void setPiecesPermutations();
 	std::vector<Piece*> deepCopyVector(std::vector<Piece*> pieces);
 	bool doesVectorExist(std::vector<Piece*> v);
 	bool areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2);
@@ -34,6 +32,7 @@ public:
 	//Rotating board functions
 	bool doesEqualRotatedBoardExist(Chessboard* board);
 	int** rotateBoard90Degrees(int** board);
+	int** reflectBoardVerticaly(int** board);
 
 	//2D array functions
 	int** allocateBoard();

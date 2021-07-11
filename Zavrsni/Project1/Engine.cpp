@@ -63,7 +63,7 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 
 						isSuccess = true;
 						if (combinations == Combinations::FIRST) {
-							//deleteBoard(temp_board);
+							deleteBoard(temp_board);
 							return isSuccess;
 						}
 					}
@@ -71,7 +71,7 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 						if (saveLayouts(temp_board, pieces, piece_index + 1, piece_count, combinations)) {
 							isSuccess = true;
 							if (combinations == Combinations::FIRST) {
-								//deleteBoard(temp_board);
+								deleteBoard(temp_board);
 								return isSuccess;
 							}
 						}
@@ -191,12 +191,14 @@ bool Engine::doesRotatedOrReflectedBoardExist(Chessboard* board) {
 
 	for (auto existingBoard : m_boards) {
 
-		Chessboard* rotated_tempBoard = new Chessboard(existingBoard->getBoard());
-		Chessboard* reflected_tempBoard = new Chessboard(existingBoard->getBoard());
-
 		if ((*board).equals((*existingBoard)))
 			return true;
 
+		Chessboard* temp = new Chessboard(existingBoard->getBoard());
+		Chessboard* rotated_tempBoard = temp;
+		Chessboard* reflected_tempBoard = temp;
+
+		
 		for (int i = 0; i < 4; i++) {
 
 			rotated_tempBoard=rotateBoard90Degrees(rotated_tempBoard->getBoard());
@@ -212,6 +214,7 @@ bool Engine::doesRotatedOrReflectedBoardExist(Chessboard* board) {
 		}
 		delete rotated_tempBoard;
 		delete reflected_tempBoard;
+	
 	}
 	
 	return false;

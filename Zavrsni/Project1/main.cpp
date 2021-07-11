@@ -65,21 +65,14 @@ int main(int argc, char* argv[]) {
 
 	RenderWindow window(VideoMode(g_board_size * chess_square_size, g_board_size * chess_square_size), "Chess");
 
-	Texture t1, t2;
+	Texture piecesTexture, boardTexture;
 
-	t1.loadFromFile("images/pieces/chess_pieces.png");
+	piecesTexture.loadFromFile("images/pieces/chess_pieces.png");
 
-	t2.loadFromFile(BoardImageFactory::createBoard());
+	boardTexture.loadFromFile(BoardImageFactory::createBoard());
 
-	Sprite s(t1);
-	Sprite sBoard(t2);
-
-	int** chessboard = new int* [g_board_size];
-
-
-	chessboard = bEngine.getBoards().back()->getBoard();
-
-
+	Sprite sAllPieces(piecesTexture);
+	Sprite sBoard(boardTexture);
 
 	int counter{ 0 };
 	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
@@ -100,7 +93,7 @@ int main(int argc, char* argv[]) {
 	
 	for (int i = 0; i < board_count; i++) {
 		for (int j = 0; j < pieces_count_per_board[i]; j++) {
-			f[i][j].setTexture(t1);
+			f[i][j].setTexture(piecesTexture);
 		}
 	}
 	
@@ -129,10 +122,7 @@ int main(int argc, char* argv[]) {
 					if(board_number>0)board_number--;
 				}
 				if (e.key.code == Keyboard::Enter) {
-					for (int i = 0; i < g_board_size; i++) {
-						delete chessboard[i];
-					}
-					delete[] chessboard;
+				
 					delete[] x;
 					return counter;
 				}
@@ -147,10 +137,6 @@ int main(int argc, char* argv[]) {
 		
 	}
 	
-	for (int i = 0; i < g_board_size; i++) {
-		delete chessboard[i];
-	}
-	delete [] chessboard;
 	delete [] x;
 }
 

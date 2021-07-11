@@ -147,7 +147,7 @@ def startAllLayouts():
         fail_label = Label(window,text="Select pieces!",width = 33, height = 8, bg = "#ff9180",font=roboto16)
         fail_label.grid(row=9,column=6,columnspan = 4,rowspan=3,padx=20)
 
-def startFirstlayoutsForEveryPermutation():
+def startFundementalLayout():
     board_size=board_size_option.get()[:1]
     queen_count = queen_count_option.get()
     king_count = king_count_option.get()
@@ -212,7 +212,7 @@ def startFirstPossibleLayout():
     
 
 button_all_layouts = Button(window, text="View All",height=2,width=12,bg="#d5e4f7",font=roboto16, command=startAllLayouts).grid(row=9,column=5,pady=10)
-button_first_combination_for_every_permutation = Button(window,text="View Some",height=2,width=12,bg="#dcf7d5", font=roboto16,command = startFirstlayoutsForEveryPermutation).grid(row=10,column=5)
+button_first_combination_for_every_permutation = Button(window,text="View Some",height=2,width=12,bg="#dcf7d5", font=roboto16,command = startFundementalLayout).grid(row=10,column=5)
 button_first_combination = Button(window, text="View One",height=2,width=12,bg="#ffcda1",font=roboto16, command=startFirstPossibleLayout).grid(row=11,column=5,pady=10)
 
 label_all_layouts = Label(window,text ="               Display all possible layouts -",font=roboto12).grid(row=9,column=0,columnspan=5,padx=10)

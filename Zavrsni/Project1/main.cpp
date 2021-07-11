@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 		return FAILURE;
 	}
 	
-	int board_count = bEngine.getBoards().size();
+
 
 	RenderWindow window(VideoMode(g_board_size * chess_square_size, g_board_size * chess_square_size), "Chess");
 
@@ -74,10 +74,9 @@ int main(int argc, char* argv[]) {
 	Sprite sAllPieces(piecesTexture);
 	Sprite sBoard(boardTexture);
 
-	int counter{ 0 };
-	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;
+	int board_count = bEngine.getBoards().size();
 
-	std::cout << "Number of fundemental combinations: " << counter << "\n\n";
+	std::cout << "Number of layouts: " << board_count << "\n\n";
 	std::cout << "Press space to see next combination" << "\n";
 	std::cout << "Press backspace to see previous combination" << "\n\n";
 	
@@ -86,28 +85,23 @@ int main(int argc, char* argv[]) {
 		pieces_count_per_board[i] = bEngine.countOccupied(bEngine.getBoards()[i]->getBoard());
 	}
 
-	Sprite** f = new Sprite*[board_count];
+	Sprite** pieceSprite = new Sprite*[board_count];
 	for (int i = 0; i < board_count; i++) {
-		f[i] = new Sprite[pieces_count_per_board[i]];
+		pieceSprite[i] = new Sprite[pieces_count_per_board[i]];
 	}
 	
 	for (int i = 0; i < board_count; i++) {
 		for (int j = 0; j < pieces_count_per_board[i]; j++) {
-			f[i][j].setTexture(piecesTexture);
+			pieceSprite[i][j].setTexture(piecesTexture);
 		}
 	}
 	
 	for (int k = 0; k < board_count; k++) {
-		loadPosition(bEngine.getBoards()[k]->getBoard(), f, k);
+		loadPosition(bEngine.getBoards()[k]->getBoard(), pieceSprite, k);
 	}
 	
-	float dx = 0, dy = 0;
-	int n = 0;
-
 	while (window.isOpen())
 	{
-		Vector2i pos = Mouse::getPosition(window);
-
 		Event e;
 		while (window.pollEvent(e))
 		{
@@ -124,14 +118,14 @@ int main(int argc, char* argv[]) {
 				if (e.key.code == Keyboard::Enter) {
 				
 					delete[] x;
-					return counter;
+					return board_count;
 				}
 			}
 
 		}
 		window.clear();
 		window.draw(sBoard);
-		for (int i = 0; i < pieces_count_per_board[board_number]; i++)window.draw(f[board_number][i]);
+		for (int i = 0; i < pieces_count_per_board[board_number]; i++)window.draw(pieceSprite[board_number][i]);
 
 		window.display();
 		
@@ -140,7 +134,7 @@ int main(int argc, char* argv[]) {
 	delete [] x;
 }
 
-void loadPosition(int** board, Sprite** f, int board_number) {
+void loadPosition(int** board, Sprite** pieceSprite, int board_number) {
 	int k = 0;
 	for (int i = 0; i < g_board_size; i++) {
 		for (int j = 0; j < g_board_size; j++) {
@@ -148,8 +142,8 @@ void loadPosition(int** board, Sprite** f, int board_number) {
 			if (!n) continue;
 			int x = abs(n) - 1;
 			int y = n > 0 ? 1 : 0;
-			f[board_number][k].setTextureRect(IntRect(size * x, size * y, size, size));
-			f[board_number][k].setPosition(size * j, size * i);
+			pieceSprite[board_number][k].setTextureRect(IntRect(size * x, size * y, size, size));
+			pieceSprite[board_number][k].setPosition(size * j, size * i);
 			k++;
 		}
 	}

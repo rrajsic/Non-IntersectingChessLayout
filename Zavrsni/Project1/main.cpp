@@ -58,7 +58,6 @@ int main(int argc, char* argv[]) {
 
 	
 	if (bEngine.calculatePossibleLayouts(function) == false) {
-		
 		return FAILURE;
 	}
 	

@@ -22,14 +22,18 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 		switch (function) {
 		case Functions::DISPLAY_ALL_LAYOUTS:
+		case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
 			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(),Combinations::EVERY))isSuccess = true;
 			break;
-		case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
-			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(), Combinations::EVERY))isSuccess = true;
-			break;
+
 		case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT: 
-			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(), Combinations::FIRST))return true;
+			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(), Combinations::FIRST)) {
+				isSuccess = true;
+				break;
+			}
+			else { isSuccess = false; }
 			break;
+
 		default:
 			return -2;
 		}	
@@ -39,23 +43,7 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		deleteBoard(board);
 	}
 
-	switch (function) {
-	case Functions::DISPLAY_ALL_LAYOUTS:
-		for (auto board : m_temp_boards) {
-			if (!doesBoardExist(board))m_boards.push_back(board);
-		}
-		break;
-	case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
-		for (auto board : m_temp_boards) {
-			if (!doesRotatedOrReflectedBoardExist(board))m_boards.push_back(board);
-		}
-		break;
-	case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
-		break;
-	default:
-		std::cout << "Error impossible function call\n";
-		break;
-	}
+	filterBoards(function);
 
 	return isSuccess;
 }
@@ -75,7 +63,7 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 
 						isSuccess = true;
 						if (combinations == Combinations::FIRST) {
-							deleteBoard(temp_board);
+							//deleteBoard(temp_board);
 							return isSuccess;
 						}
 					}
@@ -83,7 +71,7 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 						if (saveLayouts(temp_board, pieces, piece_index + 1, piece_count, combinations)) {
 							isSuccess = true;
 							if (combinations == Combinations::FIRST) {
-								deleteBoard(temp_board);
+								//deleteBoard(temp_board);
 								return isSuccess;
 							}
 						}
@@ -101,6 +89,28 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 
 	deleteBoard(temp_board);
 	return isSuccess;
+}
+
+void Engine::filterBoards(const Functions function) {
+
+	switch (function) {
+	case Functions::DISPLAY_ALL_LAYOUTS:
+		for (auto board : m_temp_boards) {
+			if (!doesBoardExist(board))m_boards.push_back(board);
+		}
+		break;
+	case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
+		for (auto board : m_temp_boards) {
+			if (!doesRotatedOrReflectedBoardExist(board))m_boards.push_back(board);
+		}
+		break;
+	case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
+		m_boards.push_back(m_temp_boards.back());
+		break;
+	default:
+		std::cout << "Error impossible function call\n";
+		break;
+	}
 }
 
 ////////////////////////////Vector Functions/////////////////////////////////////////////////
@@ -200,33 +210,12 @@ bool Engine::doesRotatedOrReflectedBoardExist(Chessboard* board) {
 				return true;
 			}
 		}
+		delete rotated_tempBoard;
+		delete reflected_tempBoard;
 	}
+	
 	return false;
 }
-
-//Chessboard* Engine::rotateBoard90Degrees(int** board) {
-//	int** temp_b = allocateBoard();
-//	for (int i = 0; i < g_board_size; i++) {
-//		for (int j = 0; j < g_board_size; j++) {
-//			temp_b[i][j] = board[g_board_size - 1 - j][i];
-//		}
-//	}
-//	Chessboard* temp = new Chessboard(temp_b);
-//	return temp;
-//}
-//
-//Chessboard* Engine::reflectBoardVerticaly(int** board) {
-//	
-//	int** temp_b = allocateBoard();
-//	for (int i = 0; i < g_board_size; i++) {
-//		for (int j = 0; j < g_board_size; j++) {
-//			temp_b[i][j] = board[g_board_size - 1 -i][j];
-//		}
-//	}
-//
-//	Chessboard* temp = new Chessboard(temp_b);
-//	return temp;
-//}
 
 Chessboard* Engine::rotateBoard90Degrees(int** board) {
 	auto temp = std::make_unique<Chessboard*>(new Chessboard(board));

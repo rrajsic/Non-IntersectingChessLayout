@@ -22,6 +22,7 @@ public:
 	//Main engine functions
 	bool calculatePossibleLayouts(const Functions function);
 	bool saveLayouts(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations);
+	void filterBoards(const Functions function);
 	
 	//Vector Functions
 	void pushPiece(Piece* piece);

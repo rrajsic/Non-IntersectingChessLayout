@@ -224,6 +224,7 @@ Chessboard* Engine::rotateBoard90Degrees(int** board) {
 			(*temp)->getBoard()[i][j] = board[g_board_size - 1 - j][i];
 		}
 	}
+	deleteBoard(board);
 	return *temp;
 }
 

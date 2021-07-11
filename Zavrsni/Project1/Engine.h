@@ -9,6 +9,7 @@ class Engine
 {
 private:
 	std::vector<Chessboard*> m_boards;
+	std::vector<Chessboard*> m_temp_boards;
 	std::vector<Piece*>m_pieces;
 	std::vector<std::vector<Piece*>> m_pieces_all_permutations;
 
@@ -30,9 +31,11 @@ public:
 	bool areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2);
 
 	//Rotating board functions
-	bool doesEqualRotatedBoardExist(Chessboard* board);
-	int** rotateBoard90Degrees(int** board);
-	int** reflectBoardVerticaly(int** board);
+	bool doesBoardExist(Chessboard* board);
+	bool doesRotatedOrReflectedBoardExist(Chessboard* board);
+	Chessboard* rotateBoard90Degrees(int** board);
+	Chessboard* reflectBoardVerticaly(int** board);
+	Chessboard* reflectBoardHorizontaly(int** board);
 
 	//2D array functions
 	int** allocateBoard();

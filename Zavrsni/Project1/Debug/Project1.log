@@ -1,7 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Project1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Engine.cpp
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(34,13): warning C4305: 'return': truncation from 'int' to 'bool'
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(145,20): warning C4018: '<': signed/unsigned mismatch
-  EnumCombinations.h
-  Generating Code...
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(163,20): warning C4018: '<': signed/unsigned mismatch
   Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\ChessCombinationEngine.exe

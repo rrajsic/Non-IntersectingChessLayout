@@ -56,7 +56,9 @@ int main(int argc, char* argv[]) {
 
 	bEngine.setPiecesPermutations();
 
+	
 	if (bEngine.calculatePossibleLayouts(function) == false) {
+		
 		return FAILURE;
 	}
 	
@@ -74,7 +76,11 @@ int main(int argc, char* argv[]) {
 	Sprite sBoard(t2);
 
 	int** chessboard = new int* [g_board_size];
+
+
 	chessboard = bEngine.getBoards().back()->getBoard();
+
+
 
 	int counter{ 0 };
 	for (int i = 0; i < bEngine.getBoards().size(); i++)counter++;

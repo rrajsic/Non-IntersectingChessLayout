@@ -216,8 +216,8 @@ button_first_combination_for_every_permutation = Button(window,text="View Some",
 button_first_combination = Button(window, text="View One",height=2,width=12,bg="#ffcda1",font=roboto16, command=startFirstPossibleLayout).grid(row=11,column=5,pady=10)
 
 label_all_layouts = Label(window,text ="               Display all possible layouts -",font=roboto12).grid(row=9,column=0,columnspan=5,padx=10)
-label_first_combination_for_every_permutation = Label(window,text ="Display combination for every permutation -",font=roboto12).grid(row=10,column=0,columnspan=5,padx=10)
-label_first_combination = Label(window,text ="              Display first possible combination -",font=roboto12).grid(row=11,column=0,columnspan=5,padx=10)
+label_first_combination_for_every_permutation = Label(window,text ="Display fundemental layouts-",font=roboto12).grid(row=10,column=0,columnspan=5,padx=10)
+label_first_combination = Label(window,text ="              Display first possible layout -",font=roboto12).grid(row=11,column=0,columnspan=5,padx=10)
 
 output_label = Label(window,text ="Output:",font=roboto16).grid(row=7,column=7)
 output_frame = Frame(window,width = 400, height = 200, bg = "#e8e8e8")

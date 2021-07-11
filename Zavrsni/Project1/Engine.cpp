@@ -21,13 +21,13 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		std::vector<Piece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 		switch (function) {
-		case Functions::DISPLAY_ALL_COMBINATIONS:
+		case Functions::DISPLAY_ALL_LAYOUTS:
 			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(),Combinations::EVERY))isSuccess = true;
 			break;
-		case Functions::DISPLAY_FIRST_COMBINATION_OF_EVERY_PERMUTATION: 
-			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(),Combinations::FIRST))isSuccess = true;
+		case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
+			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(), Combinations::EVERY))isSuccess = true;
 			break;
-		case Functions::DISPLAY_FIRST_POSSIBLE_COMBINATION: 
+		case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT: 
 			if (saveLayouts(board, temp_pieces, 0, temp_pieces.size(), Combinations::FIRST))return true;
 			break;
 		default:
@@ -38,13 +38,31 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		counter++;
 		deleteBoard(board);
 	}
+
+	switch (function) {
+	case Functions::DISPLAY_ALL_LAYOUTS:
+		for (auto board : m_temp_boards) {
+			if (!doesBoardExist(board))m_boards.push_back(board);
+		}
+		break;
+	case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
+		for (auto board : m_temp_boards) {
+			if (!doesRotatedOrReflectedBoardExist(board))m_boards.push_back(board);
+		}
+		break;
+	case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
+		break;
+	default:
+		std::cout << "Error impossible function call\n";
+		break;
+	}
+
 	return isSuccess;
 }
 
 bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations) {
 	bool isSuccess = false;
 	int** temp_board = allocateBoard();
-	initializeBoard(temp_board);
 	temp_board = copyBoard(board);
 
 	for (int i = 0; i < g_board_size; i++) {
@@ -53,8 +71,7 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
 					if (piece_index == (piece_count-1)) {
 						Chessboard* success_board = new Chessboard(temp_board);
-						if (!doesEqualRotatedBoardExist(std::move(success_board)))
-							m_boards.emplace_back(std::move(success_board));
+							m_temp_boards.push_back(std::move(success_board));
 
 						isSuccess = true;
 						if (combinations == Combinations::FIRST) {
@@ -73,10 +90,11 @@ bool Engine::saveLayouts(int** board, std::vector<Piece*> pieces, int piece_inde
 						else {
 							saveLayouts(temp_board, pieces, piece_index, piece_count,combinations);
 						}
-						temp_board = copyBoard(board);
+						
 					}
 				}
-				temp_board = copyBoard(board);
+				deleteBoard(temp_board);
+				temp_board = copyBoard(board);	
 			}
 		}
 	}
@@ -150,25 +168,35 @@ bool Engine::areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2) {
 
 ///////////////////////////////Rotating board functions///////////////////////////////////////
 
-bool Engine::doesEqualRotatedBoardExist(Chessboard* board) {
+bool Engine::doesBoardExist(Chessboard* board) {
 
-	for (auto temp : m_boards) {
-		if ((*board).equals((*temp)))
+	for (auto existingBoard : m_boards) {
+		if ((*board).equals((*existingBoard)))
 			return true;
+	}
+	return false;
+}
 
-		auto rotated_tempBoard = std::make_shared<Chessboard>(copyBoard(temp->getBoard()));
-		auto reflected_tempBoard = std::make_shared<Chessboard>(copyBoard(temp->getBoard()));
+bool Engine::doesRotatedOrReflectedBoardExist(Chessboard* board) {
+
+	for (auto existingBoard : m_boards) {
+
+		Chessboard* rotated_tempBoard = new Chessboard(existingBoard->getBoard());
+		Chessboard* reflected_tempBoard = new Chessboard(existingBoard->getBoard());
+
+		if ((*board).equals((*existingBoard)))
+			return true;
 
 		for (int i = 0; i < 4; i++) {
 
-			rotated_tempBoard = std::make_shared<Chessboard>(rotateBoard90Degrees(rotated_tempBoard->getBoard()));
-			reflected_tempBoard = std::make_shared<Chessboard>(reflectBoardVerticaly(rotated_tempBoard->getBoard()));
+			rotated_tempBoard=rotateBoard90Degrees(rotated_tempBoard->getBoard());
+			reflected_tempBoard=reflectBoardVerticaly(rotated_tempBoard->getBoard());
+		
 
-			if ((*board).equals((*rotated_tempBoard))) {
-				return true;
-			}
-
-			if ((*board).equals((*reflected_tempBoard))) {
+			if ((*board).equals((*rotated_tempBoard)) || (*board).equals((*reflected_tempBoard))) {
+			
+				delete rotated_tempBoard;
+				delete reflected_tempBoard;
 				return true;
 			}
 		}
@@ -176,28 +204,51 @@ bool Engine::doesEqualRotatedBoardExist(Chessboard* board) {
 	return false;
 }
 
+//Chessboard* Engine::rotateBoard90Degrees(int** board) {
+//	int** temp_b = allocateBoard();
+//	for (int i = 0; i < g_board_size; i++) {
+//		for (int j = 0; j < g_board_size; j++) {
+//			temp_b[i][j] = board[g_board_size - 1 - j][i];
+//		}
+//	}
+//	Chessboard* temp = new Chessboard(temp_b);
+//	return temp;
+//}
+//
+//Chessboard* Engine::reflectBoardVerticaly(int** board) {
+//	
+//	int** temp_b = allocateBoard();
+//	for (int i = 0; i < g_board_size; i++) {
+//		for (int j = 0; j < g_board_size; j++) {
+//			temp_b[i][j] = board[g_board_size - 1 -i][j];
+//		}
+//	}
+//
+//	Chessboard* temp = new Chessboard(temp_b);
+//	return temp;
+//}
 
-int** Engine::rotateBoard90Degrees(int** board) {
-	int** tempBoard = allocateBoard();
-
+Chessboard* Engine::rotateBoard90Degrees(int** board) {
+	auto temp = std::make_unique<Chessboard*>(new Chessboard(board));
 	for (int i = 0; i < g_board_size; i++) {
 		for (int j = 0; j < g_board_size; j++) {
-			tempBoard[i][j] = board[g_board_size - 1 - j][i];
+			(*temp)->getBoard()[i][j] = board[g_board_size - 1 - j][i];
 		}
 	}
-	return tempBoard;
+	return *temp;
 }
 
-int** Engine::reflectBoardVerticaly(int** board) {
-	int** tempBoard = allocateBoard();
-	
+Chessboard*  Engine::reflectBoardVerticaly(int** board) {
+	auto temp = std::make_unique<Chessboard*>(new Chessboard(board));
 	for (int i = 0; i < g_board_size; i++) {
 		for (int j = 0; j < g_board_size; j++) {
-			tempBoard[i][j] = board[i][g_board_size - 1 - j];
+			(*temp)->getBoard()[i][j] = board[g_board_size - 1 - i][j];
 		}
 	}
-	return tempBoard;
+
+	return *temp;
 }
+
 
 /////////////////////////////////////2D Array functions//////////////////////////////////////
 

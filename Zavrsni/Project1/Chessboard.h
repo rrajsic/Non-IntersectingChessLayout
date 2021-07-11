@@ -9,7 +9,8 @@ private:
 
 public:
 	Chessboard(int** board) {
-		m_board = board;
+		allocateBoard();
+		copyBoard(board);
 	}
 
 	int** getBoard() const { return m_board; }
@@ -25,22 +26,28 @@ public:
 		}
 		return equals;
 	}
-	static bool equals(Chessboard* testBoard, std::vector<Chessboard*> boards) {
-		bool board_equals = false;
-		for (auto board : boards) {
-			bool field_equals = true;
-			for (int i = 0; i < g_board_size; i++) {
-				for (int j = 0; j < g_board_size; j++) {
-					if (testBoard->getBoard()[i][j] != board->getBoard()[i][j]){
-						field_equals = false;
-						}
-				}
+	void copyBoard(int** board) {
+		for (int i = 0; i < g_board_size; i++) {
+			for (int j = 0; j < g_board_size; j++) {
+				m_board[i][j] = board[i][j];
 			}
-			if (field_equals)board_equals = true;
 		}
-		return board_equals;
+	}
+	void allocateBoard() {
+		
+		m_board = new int* [g_board_size];
+		for (int i = 0; i < g_board_size; i++)
+			m_board[i] = new int[g_board_size];
 	}
 
+
+	void initializeBoard(int** board) {
+		for (int i = 0; i < g_board_size; i++) {
+			for (int j = 0; j < g_board_size; j++) {
+				board[i][j] = 0;
+			}
+		}
+	}
 	~Chessboard() {
 		for (int i = 0; i < g_board_size; i++)
 			delete m_board[i];

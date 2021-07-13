@@ -1,6 +1,14 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Project1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Engine.cpp
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.h(36,63): warning C4227: anachronism used: qualifiers on reference are ignored
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(34,14): warning C4305: 'return': truncation from 'int' to 'bool'
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(154,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.cpp(171,70): warning C4227: anachronism used: qualifiers on reference are ignored
   main.cpp
 C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\BoardImageFactory.h(9,2): warning C4091: 'static ': ignored on left of 'BoardImageFactory' when no variable is declared
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(144,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(144,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\Engine.h(36,63): warning C4227: anachronism used: qualifiers on reference are ignored
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(141,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Project1\main.cpp(141,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Piece.cpp
+  Generating Code...
   Project1.vcxproj -> C:\Users\rajsi\Documents\Faks\6. Semestar\Zavrsni\Zavrsni\Debug\ChessCombinationEngine.exe

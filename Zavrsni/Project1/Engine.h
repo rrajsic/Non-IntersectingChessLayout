@@ -21,7 +21,7 @@ public:
 	
 	//Main engine functions
 	bool calculatePossibleLayouts(const Functions function);
-	bool saveLayouts(int** board, std::vector<Piece*> pieces, int piece_index, int piece_count,Combinations combinations);
+	bool saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Combinations combinations);
 	void filterBoards(const Functions function);
 	
 	//Vector Functions
@@ -32,18 +32,11 @@ public:
 	bool areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2);
 
 	//Rotating board functions
-	bool doesBoardExist(Chessboard* board);
-	bool doesRotatedOrReflectedBoardExist(Chessboard* board);
-	Chessboard* rotateBoard90Degrees(int** board);
-	Chessboard* reflectBoardVerticaly(int** board);
-	Chessboard* reflectBoardHorizontaly(int** board);
+	bool doesBoardExist(Chessboard& board);
+	bool doesRotatedOrReflectedBoardExist(Chessboard& const board);
 
-	//2D array functions
-	int** allocateBoard();
-	void initializeBoard(int** board);
-	int** copyBoard(int** board);
-	int countOccupied(int** board);
-	void deleteBoard(int** board);
+	Chessboard rotateBoard90Degrees(Chessboard &board);
+	Chessboard reflectBoardVerticaly(Chessboard &board);
 	
 };
 

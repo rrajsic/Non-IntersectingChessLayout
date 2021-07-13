@@ -27,9 +27,6 @@
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EnumBoard.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnumCombinations.h">
       <Filter>Header Files</Filter>
     </ClCompile>

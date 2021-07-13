@@ -1,7 +1,6 @@
 #ifndef ENUMTYPE_H
 #define ENUMTYPE_H
 
-
 enum Type {
 
 	UNOCCUPIED = 0,	
@@ -13,7 +12,6 @@ enum Type {
 	ROOK = 6,		
 
 	MAX_TYPE
-
 };
 
 #endif

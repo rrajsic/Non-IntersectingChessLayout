@@ -28,7 +28,7 @@ PIECE_OPTIONS = [
 ]
 
 window = Tk()
-window.title("Chessboard Menu")
+window.title("Chessboard Layout Menu")
 window.minsize(900,600)
 window.resizable(width = FALSE, height = FALSE)
 
@@ -131,7 +131,7 @@ def startAllLayouts():
 
     if pieces_inputed:
 
-        output = os.system("ChessCombinationEngine.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessLayoutEngine.exe 1 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output < 0:
             output_frame.destroy()
@@ -162,7 +162,7 @@ def startFundementalLayout():
 
     if pieces_inputed:
 
-        output = os.system("ChessCombinationEngine.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessLayoutEngine.exe 2 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output < 0:
             output_frame.destroy()
@@ -193,7 +193,7 @@ def startFirstPossibleLayout():
 
     if pieces_inputed:
 
-        output = os.system("ChessCombinationEngine.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
+        output = os.system("ChessLayoutEngine.exe 3 "+str(board_size)+" "+str(queen_count)+" "+str(king_count)+" "+str(rook_count)+" "+str(bishop_count)+" "+str(knight_count))
         
         if output < 0:
             output_frame.destroy()

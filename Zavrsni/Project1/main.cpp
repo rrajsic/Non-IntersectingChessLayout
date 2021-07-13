@@ -30,13 +30,9 @@ int main(int argc, char* argv[]) {
 	const int bishop_count = x[6];
 	const int knight_count = x[7];
 	
-
-	const int chess_square_size = 106;
 	int board_number = 0;
 	
 	Engine bEngine = Engine();
-
-	std::vector<Piece*>pieces;
 
 	for (int i = 0; i < queen_count; i++) {
 		bEngine.pushPiece(new Queen());
@@ -60,10 +56,8 @@ int main(int argc, char* argv[]) {
 	if (bEngine.calculatePossibleLayouts(function) == false) {
 		return FAILURE;
 	}
-	
 
-
-	RenderWindow window(VideoMode(g_board_size * chess_square_size, g_board_size * chess_square_size), "Chess");
+	RenderWindow window(VideoMode(g_board_size * size, g_board_size * size), "Chess");
 
 	Texture piecesTexture, boardTexture;
 

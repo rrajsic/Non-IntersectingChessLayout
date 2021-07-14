@@ -60,6 +60,8 @@ int main(int argc, char* argv[]) {
 	if (bEngine.calculatePossibleLayouts(function) == false) 
 		return FAILURE;
 	
+	bEngine.filterBoards(function);
+
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
 	std::cout << "Calculation took " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " seconds." << std::endl;

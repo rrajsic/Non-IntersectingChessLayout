@@ -1,8 +1,8 @@
 #ifndef IPIECE_H
 #define IPIECE_H
 
-#define SUCCESS 0
-#define FAILURE -1
+#define SUCCESS true
+#define FAILURE false
 
 extern int g_board_size;
 
@@ -26,7 +26,7 @@ public:
 		m_position.setCol(y);
 	}
  
-	virtual int placePiece(int x, int y, Chessboard& board) {
+	virtual bool placePiece(int x, int y, Chessboard& board) {
 
 		setPosition(x, y);
 
@@ -36,14 +36,14 @@ public:
 		return SUCCESS;
 	}
 
-	virtual int fillBoard(Chessboard& board) = 0;
+	virtual bool fillBoard(Chessboard& board) = 0;
 
 	virtual const Type getType() { return m_type; }
 
-	int fillRowAndCol(Chessboard& board);
-	int fillDiagonals(Chessboard& board);
-	int fillOneSpotAround(Chessboard& board);
-	int fill_L(Chessboard& board);
+	bool fillRowAndCol(Chessboard& board);
+	bool fillDiagonals(Chessboard& board);
+	bool fillOneSpotAround(Chessboard& board);
+	bool fill_L(Chessboard& board);
 };
 
 #endif

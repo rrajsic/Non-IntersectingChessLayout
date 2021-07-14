@@ -13,7 +13,7 @@ class King : virtual public Piece
 public:
 	King() { m_type = Type::KING; }
 
-	int fillBoard(Chessboard& board) {
+	bool fillBoard(Chessboard& board) {
 		if (fillOneSpotAround(board) == FAILURE) {
 			return FAILURE;
 		}
@@ -28,7 +28,7 @@ class Queen : virtual public Piece
 public:
 	Queen(){ m_type = Type::QUEEN; }
 
-	int fillBoard(Chessboard& board) {
+	bool fillBoard(Chessboard& board) {
 		if (fillRowAndCol(board) == FAILURE)
 			return FAILURE;
 		if (fillDiagonals(board) == FAILURE)
@@ -44,7 +44,7 @@ class Rook : virtual public Piece
 public:
 	Rook() { m_type = Type::ROOK; }
 
-	int fillBoard(Chessboard& board) {
+	bool fillBoard(Chessboard& board) {
 		if (fillRowAndCol(board) == FAILURE)
 			return FAILURE;
 
@@ -59,7 +59,7 @@ class Bishop : virtual public Piece
 public:
 	Bishop() { m_type = Type::BISHOP; }
 
-	int fillBoard(Chessboard& board) {
+	bool fillBoard(Chessboard& board) {
 
 		if (fillDiagonals(board) == FAILURE)
 			return FAILURE;
@@ -76,7 +76,7 @@ public:
 	Knight() { m_type = Type::KNIGHT; }
 	
 
-	int fillBoard(Chessboard& board) {
+	bool fillBoard(Chessboard& board) {
 		if (fill_L(board) == FAILURE)
 			return FAILURE;
 

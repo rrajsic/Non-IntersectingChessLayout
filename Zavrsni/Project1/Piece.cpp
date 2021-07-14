@@ -4,7 +4,7 @@
 #include "Point2D.h"
 #include "Piece.h"
 
-int Piece::fillRowAndCol(Chessboard& board) {
+bool Piece::fillRowAndCol(Chessboard& board) {
 
 	for (int i = 0; i < g_board_size; i++)
 		for (int j = 0; j < g_board_size; j++){
@@ -27,7 +27,7 @@ int Piece::fillRowAndCol(Chessboard& board) {
 	return SUCCESS;
 }
 
-int Piece::fillDiagonals(Chessboard& board) {
+bool Piece::fillDiagonals(Chessboard& board) {
 	for (int i = 0; i < g_board_size; i++) 
 		for (int j = 0; j < g_board_size; j++) 
 			if (abs(i - m_position.getRow()) == abs(j - m_position.getCol())) {
@@ -40,7 +40,7 @@ int Piece::fillDiagonals(Chessboard& board) {
 	return SUCCESS;
 }
 
-int Piece::fillOneSpotAround(Chessboard& board) {
+bool Piece::fillOneSpotAround(Chessboard& board) {
 	for (int i = 0; i < g_board_size; i++) 
 		for (int j = 0; j < g_board_size; j++) 
 			if ((abs(i - m_position.getRow())) <= 1 && (abs(j - m_position.getCol())) <= 1) {
@@ -54,7 +54,7 @@ int Piece::fillOneSpotAround(Chessboard& board) {
 	return SUCCESS;
 }
 
-int Piece::fill_L(Chessboard& board) {
+bool Piece::fill_L(Chessboard& board) {
 	for (int i = 0; i < g_board_size; i++) 
 		for (int j = 0; j < g_board_size; j++) 
 			if ((abs(i - m_position.getRow()) == 2 && abs(j - m_position.getCol()) == 1)

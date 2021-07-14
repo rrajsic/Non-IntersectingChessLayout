@@ -5,7 +5,7 @@
 #include "BoardImageFactory.h"
 #include "Pieces.h"
 #include "EnumFunctions.h"
-#include "EnumCombinations.h"
+#include "EnumLayout.h"
 #include "Engine.h"
 
 using namespace sf;
@@ -57,8 +57,8 @@ int main(int argc, char* argv[]) {
 
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-	if (bEngine.calculatePossibleLayouts(function) == false) 
-		return FAILURE;
+	if (bEngine.calculatePossibleLayouts(function) == FAILURE) 
+		return -1;
 	
 	bEngine.filterBoards(function);
 

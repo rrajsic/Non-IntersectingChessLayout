@@ -21,7 +21,7 @@ public:
 	
 	//Main engine functions
 	bool calculatePossibleLayouts(const Functions function);
-	bool saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Combinations combinations);
+	bool saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Layouts combinations);
 	void filterBoards(const Functions function);
 	
 	//Vector Functions

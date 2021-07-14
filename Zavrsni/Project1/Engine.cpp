@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "Pieces.h"
 #include "EnumFunctions.h"
-#include "EnumCombinations.h"
+#include "EnumLayout.h"
 #include "Chessboard.h"
 #include "Engine.h"
 
@@ -21,13 +21,13 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		switch (function) {
 			case Functions::DISPLAY_ALL_LAYOUTS:
 			case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
-				if (saveLayouts(*board, temp_pieces, 0, temp_pieces.size(), Combinations::EVERY))isSuccess = true;
+				if (saveLayouts(*board, temp_pieces, 0, temp_pieces.size(), Layouts::EVERY))
+					isSuccess = true;
 				break;
 
 			case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
-				if (saveLayouts(*board, temp_pieces, 0, temp_pieces.size(), Combinations::FIRST)) 
+				if (saveLayouts(*board, temp_pieces, 0, temp_pieces.size(), Layouts::FIRST)) 
 					isSuccess = true;
-				else isSuccess = false;
 				break;
 
 			default:
@@ -40,26 +40,26 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 	return isSuccess;
 }
 
-bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Combinations combinations) {
+bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Layouts combinations) {
 	bool isSuccess = false;
 	Chessboard temp_board = std::move(board);
 
 	for (int i = 0; i < g_board_size; i++) 
 		for (int j = 0; j < g_board_size; j++) 
-			if (temp_board(i,j) == 0) {
+			if (temp_board(i,j) == Type::UNOCCUPIED) {
 				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
 					if (piece_index == (piece_count - 1)) {
 
 						m_temp_boards.emplace_back(new Chessboard(std::move(temp_board)));
 						isSuccess = true;
-						if (combinations == Combinations::FIRST) 
+						if (combinations == Layouts::FIRST) 
 							return isSuccess;
 						
 					} else {
 						if (saveLayouts(temp_board, pieces, piece_index + 1, piece_count, combinations)) {
 
 							isSuccess = true;
-							if (combinations == Combinations::FIRST) 
+							if (combinations == Layouts::FIRST) 
 								return isSuccess;
 						}	
 					}

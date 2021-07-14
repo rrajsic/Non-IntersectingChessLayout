@@ -148,7 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="BoardImageFactory.cpp" />
-    <ClCompile Include="EnumCombinations.h" />
+    <ClCompile Include="EnumLayout.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piece.cpp" />
   </ItemGroup>

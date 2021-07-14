@@ -15,7 +15,7 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 
 	while (!m_pieces_all_permutations.empty()) {
 		Chessboard* board = new Chessboard();
-		std::vector<Piece*> temp_pieces = deepCopyVector(m_pieces_all_permutations.back());
+		std::vector<Piece*> temp_pieces = std::move(m_pieces_all_permutations.back());
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 
 		switch (function) {
@@ -109,39 +109,40 @@ void Engine::setPiecesPermutations() {
 
 	do {
 		if (!doesVectorExist(m_pieces))
-			m_pieces_all_permutations.push_back(deepCopyVector(m_pieces));
+			//m_pieces_all_permutations.push_back(deepCopyVector(m_pieces));
+			m_pieces_all_permutations.emplace_back(std::move(m_pieces));
 		counter++;
 	} while (std::next_permutation(begin(m_pieces), end(m_pieces), [](Piece *&p1,Piece* &p2) {
 		return p1->getType() < p2->getType();
 		}));
 }
 
-std::vector<Piece*> Engine::deepCopyVector(std::vector<Piece*> pieces) {
-	std::vector<Piece*> temp;
-	for (auto i : pieces) 
-		switch (i->getType()) {
-		case Type::KING:
-			temp.push_back(new King());
-			break;
-		case Type::QUEEN:
-			temp.push_back(new Queen());
-			break;
-		case Type::ROOK:
-			temp.push_back(new Rook());
-			break;
-		case Type::BISHOP:
-			temp.push_back(new Bishop());
-			break;
-		case Type::KNIGHT:
-			temp.push_back(new Knight());
-			break;
-		default:
-			std::cout << "Error" << std::endl;
-			exit(EXIT_FAILURE);
-		}
-	
-	return temp;
-}
+//std::vector<Piece*> Engine::deepCopyVector(std::vector<Piece*> pieces) {
+//	std::vector<Piece*> temp;
+//	for (auto i : pieces) 
+//		switch (i->getType()) {
+//		case Type::KING:
+//			temp.push_back(new King());
+//			break;
+//		case Type::QUEEN:
+//			temp.push_back(new Queen());
+//			break;
+//		case Type::ROOK:
+//			temp.push_back(new Rook());
+//			break;
+//		case Type::BISHOP:
+//			temp.push_back(new Bishop());
+//			break;
+//		case Type::KNIGHT:
+//			temp.push_back(new Knight());
+//			break;
+//		default:
+//			std::cout << "Error" << std::endl;
+//			exit(EXIT_FAILURE);
+//		}
+//	
+//	return temp;
+//}
 
 bool Engine::doesVectorExist(std::vector<Piece*> v) {
 	for (auto i : m_pieces_all_permutations)

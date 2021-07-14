@@ -27,7 +27,6 @@ public:
 	//Vector Functions
 	void pushPiece(Piece* piece);
 	void setPiecesPermutations();
-	std::vector<Piece*> deepCopyVector(std::vector<Piece*> pieces);
 	bool doesVectorExist(std::vector<Piece*> v);
 	bool areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2);
 

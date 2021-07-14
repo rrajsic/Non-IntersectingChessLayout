@@ -40,7 +40,7 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 	return isSuccess;
 }
 
-bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Layouts combinations) {
+bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, int piece_count, Layouts layouts) {
 	bool isSuccess = false;
 	Chessboard temp_board = std::move(board);
 
@@ -52,14 +52,14 @@ bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piec
 
 						m_temp_boards.emplace_back(new Chessboard(std::move(temp_board)));
 						isSuccess = true;
-						if (combinations == Layouts::FIRST) 
+						if (layouts == Layouts::FIRST) 
 							return isSuccess;
 						
 					} else {
-						if (saveLayouts(temp_board, pieces, piece_index + 1, piece_count, combinations)) {
+						if (saveLayouts(temp_board, pieces, piece_index + 1, piece_count, layouts)) {
 
 							isSuccess = true;
-							if (combinations == Layouts::FIRST) 
+							if (layouts == Layouts::FIRST) 
 								return isSuccess;
 						}	
 					}
@@ -75,12 +75,14 @@ void Engine::filterBoards(const Functions function) {
 	switch (function) {
 	case Functions::DISPLAY_ALL_LAYOUTS:
 		for (auto board : m_temp_boards) 
-			if (!doesBoardExist(*board))m_boards.emplace_back(std::move(board));	
+			if (!doesBoardExist(*board))
+				m_boards.emplace_back(std::move(board));	
 		break;
 
 	case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
 		for (auto board : m_temp_boards) 
-			if (!doesRotatedOrReflectedBoardExist(*board))m_boards.emplace_back(std::move(board));
+			if (!doesRotatedOrReflectedBoardExist(*board))
+				m_boards.emplace_back(std::move(board));
 		break;
 
 	case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:

@@ -4,9 +4,9 @@
 #include <chrono>
 #include "BoardImageFactory.h"
 #include "Pieces.h"
-#include "EnumFunctions.h"
-#include "EnumLayout.h"
+#include "EnumLayouts.h"
 #include "Engine.h"
+#include "LayoutsFactory.h"
 
 using namespace sf;
 
@@ -21,9 +21,7 @@ int main(int argc, char* argv[]) {
 	for (int i = 1; i < argc; i++) 
 		x[i] = atoi(argv[i]);
 	
-
-	const int functionCall = x[1];
-	const Functions function = static_cast<Functions>(x[1]);
+	const Layouts chosen_layouts = LayoutsFactory::createLayout(x[1]);
 	g_board_size = x[2];
 	const int queen_count = x[3];
 	const int king_count = x[4];
@@ -35,7 +33,7 @@ int main(int argc, char* argv[]) {
 
 	int board_number = 0;
 	
-	Engine bEngine = Engine();
+	Engine bEngine = Engine(chosen_layouts);
 
 	for (int i = 0; i < queen_count; i++) 
 		bEngine.pushPiece(new Queen());
@@ -57,10 +55,10 @@ int main(int argc, char* argv[]) {
 
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-	if (bEngine.calculatePossibleLayouts(function) == FAILURE) 
+	if (bEngine.calculatePossibleLayouts() == FAILURE) 
 		return -1;
 	
-	bEngine.filterBoards(function);
+	bEngine.filterBoards();
 
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 

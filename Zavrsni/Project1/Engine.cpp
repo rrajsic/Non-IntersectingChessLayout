@@ -1,14 +1,14 @@
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include "Pieces.h"
-#include "EnumFunctions.h"
-#include "EnumLayout.h"
+#include "EnumLayouts.h"
 #include "Chessboard.h"
+#include "Piece.h"
 #include "Engine.h"
 
-
 /////////////////////////////Main engine functions////////////////////////////////////////////////
-bool Engine::calculatePossibleLayouts(const Functions function) {
+bool Engine::calculatePossibleLayouts() {
 	bool isSuccess = false;
 	int counter(1);
 	int num_of_permutations = m_pieces_all_permutations.size();
@@ -18,21 +18,10 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 		std::vector<Piece*> temp_pieces = std::move(m_pieces_all_permutations.back());
 		std::cout << "Calculating permutations: " << counter << "/" << num_of_permutations << "\n";
 
-		switch (function) {
-			case Functions::DISPLAY_ALL_LAYOUTS:
-			case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
-				if (saveLayouts(*board, temp_pieces, 0, Layouts::EVERY))
-					isSuccess = true;
-				break;
+		if (saveLayouts(*board, temp_pieces, 0))
+			isSuccess = true;
+		break;
 
-			case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
-				if (saveLayouts(*board, temp_pieces, 0, Layouts::FIRST)) 
-					isSuccess = true;
-				break;
-
-			default:
-				return -2;
-		}
 		m_pieces_all_permutations.pop_back();
 		counter++;
 	}
@@ -40,7 +29,7 @@ bool Engine::calculatePossibleLayouts(const Functions function) {
 	return isSuccess;
 }
 
-bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, Layouts layouts) {
+bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index) {
 	bool isSuccess = false;
 	Chessboard temp_board = std::move(board);
 
@@ -50,16 +39,16 @@ bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piec
 				if (pieces[piece_index]->placePiece(i, j, temp_board) == SUCCESS) {
 					if (piece_index == (pieces.size() - 1)) {
 
-						m_temp_boards.emplace_back(new Chessboard(std::move(temp_board)));
+						m_unfiltered_boards.emplace_back(new Chessboard(std::move(temp_board)));
 						isSuccess = true;
-						if (layouts == Layouts::FIRST) 
+						if (m_layouts == Layouts::FIRST) 
 							return isSuccess;
 						
 					} else {
-						if (saveLayouts(temp_board, pieces, piece_index + 1, layouts)) {
+						if (saveLayouts(temp_board, pieces, piece_index + 1)) {
 
 							isSuccess = true;
-							if (layouts == Layouts::FIRST) 
+							if (m_layouts == Layouts::FIRST) 
 								return isSuccess;
 						}	
 					}
@@ -70,23 +59,23 @@ bool Engine::saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piec
 	return isSuccess;
 }
 
-void Engine::filterBoards(const Functions function) {
+void Engine::filterBoards() {
 
-	switch (function) {
-	case Functions::DISPLAY_ALL_LAYOUTS:
-		for (auto board : m_temp_boards) 
+	switch (m_layouts) {
+	case Layouts::ALL:
+		for (auto board : m_unfiltered_boards) 
 			if (!doesBoardExist(*board))
-				m_boards.emplace_back(std::move(board));	
+				m_filtered_boards.emplace_back(std::move(board));	
 		break;
 
-	case Functions::DISPLAY_FUNDEMENTAL_LAYOUTS:
-		for (auto board : m_temp_boards) 
+	case Layouts::FUNDEMENTAL:
+		for (auto board : m_unfiltered_boards) 
 			if (!doesRotatedOrReflectedBoardExist(*board))
-				m_boards.emplace_back(std::move(board));
+				m_filtered_boards.emplace_back(std::move(board));
 		break;
 
-	case Functions::DISPLAY_FIRST_POSSIBLE_LAYOUT:
-		m_boards.push_back(m_temp_boards.back());
+	case Layouts::FIRST:
+		m_filtered_boards.push_back(m_unfiltered_boards.back());
 		break;
 
 	default:
@@ -135,7 +124,7 @@ bool Engine::areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2) {
 
 bool Engine::doesBoardExist(Chessboard& board) {
 
-	for (auto existingBoard : m_boards) {
+	for (auto existingBoard : m_filtered_boards) {
 		if (board.equals(*existingBoard))
 			return true;
 	}
@@ -144,7 +133,7 @@ bool Engine::doesBoardExist(Chessboard& board) {
 
 bool Engine::doesRotatedOrReflectedBoardExist(Chessboard& const board) {
 
-	for (auto existingBoard : m_boards) {
+	for (auto existingBoard : m_filtered_boards) {
 		if (board.equals(*existingBoard))
 			return true;
 

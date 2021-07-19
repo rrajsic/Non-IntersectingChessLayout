@@ -1,5 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
+
 #include "Chessboard.h"
 #include "Piece.h"
 
@@ -8,21 +9,22 @@ extern int g_board_size;
 class Engine
 {
 private:
-	std::vector<Chessboard*> m_boards;
-	std::vector<Chessboard*> m_temp_boards;
+	std::vector<Chessboard*> m_filtered_boards;
+	std::vector<Chessboard*> m_unfiltered_boards;
 	std::vector<Piece*>m_pieces;
 	std::vector<std::vector<Piece*>> m_pieces_all_permutations;
+	Layouts m_layouts;
 
 public:
-	Engine() {}
+	Engine(Layouts layout) : m_layouts(layout) {}
 
 	//Getters 
-	std::vector<Chessboard*> getBoards() { return m_boards; }
+	std::vector<Chessboard*> getBoards() { return m_filtered_boards; }
 	
 	//Main engine functions
-	bool calculatePossibleLayouts(const Functions function);
-	bool saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index, Layouts combinations);
-	void filterBoards(const Functions function);
+	bool calculatePossibleLayouts();
+	bool saveLayouts(Chessboard& board, std::vector<Piece*> pieces, int piece_index);
+	void filterBoards();
 	
 	//Vector Functions
 	void pushPiece(Piece* piece);

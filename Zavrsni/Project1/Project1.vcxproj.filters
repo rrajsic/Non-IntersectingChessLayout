@@ -24,11 +24,32 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Piece.cpp">
+    <ClCompile Include="PieceMovements.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EnumLayout.h">
+    <ClCompile Include="EnumLayouts.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutsFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Chessboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Queen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bishop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +74,7 @@
     <ClInclude Include="BoardImageFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnumFunctions.h">
+    <ClInclude Include="LayoutsFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

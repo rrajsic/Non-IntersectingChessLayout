@@ -2,8 +2,11 @@
 #define ENUMCOMBINATIONS_H
 
 enum class Layouts {
-	EVERY = 0,
-	FIRST = 1,
+	ALL,
+	FUNDEMENTAL,
+	FIRST,
+
+	MAX_LAYOUT,
 };
 
 #endif

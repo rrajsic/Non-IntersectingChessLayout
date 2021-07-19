@@ -146,18 +146,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bishop.cpp" />
+    <ClCompile Include="Chessboard.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="BoardImageFactory.cpp" />
-    <ClCompile Include="EnumLayout.h" />
+    <ClCompile Include="EnumLayouts.h" />
+    <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
+    <ClCompile Include="LayoutsFactory.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="PieceMovements.cpp" />
+    <ClCompile Include="Queen.cpp" />
+    <ClCompile Include="Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
     <ClInclude Include="BoardImageFactory.h" />
     <ClInclude Include="Chessboard.h" />
-    <ClInclude Include="EnumFunctions.h" />
     <ClInclude Include="EnumType.h" />
+    <ClInclude Include="LayoutsFactory.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Pieces.h" />
     <ClInclude Include="Point2D.h" />

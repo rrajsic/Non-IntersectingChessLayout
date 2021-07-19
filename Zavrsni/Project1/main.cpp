@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "Calculation took " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " seconds." << std::endl;
 	
 
-	RenderWindow window(VideoMode(g_board_size * size, g_board_size * size), "Chessboard Layout");
+	RenderWindow window(VideoMode(g_board_size * size, g_board_size * size), "Chessboard");
 
 	Texture piecesTexture, boardTexture;
 

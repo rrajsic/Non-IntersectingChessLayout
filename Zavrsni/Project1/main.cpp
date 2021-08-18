@@ -53,16 +53,17 @@ int main(int argc, char* argv[]) {
 
 	bEngine.setPiecesPermutations();
 
-	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	auto begin = std::chrono::high_resolution_clock::now();
 
 	if (bEngine.calculatePossibleLayouts() == FAILURE) 
 		return -1;
 	
 	bEngine.filterBoards();
 
-	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	auto end = std::chrono::high_resolution_clock::now();
 
-	std::cout << "Calculation took " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " seconds." << std::endl;
+	auto time_elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+	std::cout << "Calculation took " << time_elapsed.count() << " mili seconds." << std::endl;
 	
 
 	RenderWindow window(VideoMode(g_board_size * size, g_board_size * size), "Chessboard");

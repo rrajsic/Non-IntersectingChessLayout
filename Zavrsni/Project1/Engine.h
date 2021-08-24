@@ -9,7 +9,8 @@ extern int g_board_size;
 class Engine
 {
 private:
-	std::vector<Chessboard*> m_filtered_boards;
+	std::vector<Chessboard*> m_fundemental_boards;
+	std::vector<Chessboard*> m_distinct_boards;
 	std::vector<Chessboard*> m_unfiltered_boards;
 	std::vector<Piece*>m_pieces;
 	std::vector<std::vector<Piece*>> m_pieces_all_permutations;
@@ -19,7 +20,8 @@ public:
 	Engine(Layouts layout) : m_layouts(layout) {}
 
 	//Getters 
-	std::vector<Chessboard*> getBoards() { return m_filtered_boards; }
+	std::vector<Chessboard*> getBoards();
+
 	
 	//Main engine functions
 	bool calculatePossibleLayouts();

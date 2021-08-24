@@ -3,7 +3,7 @@
 #include "Pieces.h"
 
 bool Rook::fillBoard(Chessboard& board) {
-	if (fill_L(board) == FAILURE)
+	if (fillRowAndCol(board) == FAILURE)
 		return FAILURE;
 
 	board(m_position.getRow(), m_position.getCol()) = m_type;

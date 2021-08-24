@@ -7,6 +7,16 @@
 #include "Piece.h"
 #include "Engine.h"
 
+/////////////////////////////Getter///////////////////////////////////////////////////////////////
+
+ std::vector<Chessboard*> Engine::getBoards(){
+
+	if (!m_fundemental_boards.empty())
+		return m_fundemental_boards;
+
+	else return m_distinct_boards;
+}
+
 /////////////////////////////Main engine functions////////////////////////////////////////////////
 bool Engine::calculatePossibleLayouts() {
 	bool isSuccess = false;
@@ -63,19 +73,26 @@ void Engine::filterBoards() {
 
 	switch (m_layouts) {
 	case Layouts::ALL:
-		for (auto board : m_unfiltered_boards) 
+		for (auto board : m_unfiltered_boards)
 			if (!doesBoardExist(*board))
-				m_filtered_boards.emplace_back(std::move(board));	
+				m_distinct_boards.emplace_back(std::move(board));
+	
 		break;
 
 	case Layouts::FUNDEMENTAL:
-		for (auto board : m_unfiltered_boards) 
-			if (!doesRotatedOrReflectedBoardExist(*board))
-				m_filtered_boards.emplace_back(std::move(board));
+		for (auto distinct_board : m_unfiltered_boards) {		
+			if (!doesBoardExist(*distinct_board))
+				m_distinct_boards.emplace_back(std::move(distinct_board));
+		}
+		for (auto fundemental_board : m_distinct_boards) {
+			if (!doesRotatedOrReflectedBoardExist(*fundemental_board))
+				m_fundemental_boards.emplace_back(std::move(fundemental_board));
+		}
+	
 		break;
 
 	case Layouts::FIRST:
-		m_filtered_boards.push_back(m_unfiltered_boards.back());
+		m_distinct_boards.push_back(m_unfiltered_boards.back());
 		break;
 
 	default:
@@ -124,7 +141,7 @@ bool Engine::areVectorsEqual(std::vector<Piece*> v1, std::vector<Piece*> v2) {
 
 bool Engine::doesBoardExist(Chessboard& board) {
 
-	for (auto existingBoard : m_filtered_boards) {
+	for (auto existingBoard : m_distinct_boards) {
 		if (board.equals(*existingBoard))
 			return true;
 	}
@@ -133,7 +150,7 @@ bool Engine::doesBoardExist(Chessboard& board) {
 
 bool Engine::doesRotatedOrReflectedBoardExist(Chessboard& const board) {
 
-	for (auto existingBoard : m_filtered_boards) {
+	for (auto existingBoard : m_fundemental_boards) {
 		if (board.equals(*existingBoard))
 			return true;
 

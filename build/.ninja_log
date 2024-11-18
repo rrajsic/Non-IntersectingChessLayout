@@ -1,0 +1,16 @@
+# ninja log v6
+30	908	7536364569462852	build.ninja	52ab3a1ead8c41e8
+35	2035	7536362085667753	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/boards/Chessboard.cpp.obj	952764a87424ba25
+122	2440	7536362086567796	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/pieces/Bishop.cpp.obj	4ccb839fad58731f
+3322	5051	7536362118534078	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/pieces/Queen.cpp.obj	9e97704eb40b248b
+13	3318	7536362085517863	CMakeFiles/ChessLayoutEngine.dir/0c464ce06cab0433d8e43ac698c31025/ChessLayoutEngine/boards/BoardImageFactory.cpp.obj	16a7654223db8062
+85	3439	7536362086117748	CMakeFiles/ChessLayoutEngine.dir/0c464ce06cab0433d8e43ac698c31025/ChessLayoutEngine/engine/LayoutsFactory.cpp.obj	b239e3f758e5e505
+104	3549	7536362086417737	CMakeFiles/ChessLayoutEngine.dir/0c464ce06cab0433d8e43ac698c31025/ChessLayoutEngine/engine/PieceMovements.cpp.obj	e7c8b68e7cf11a90
+2040	4357	7536362105703760	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/pieces/King.cpp.obj	49b53ff98663dbd2
+2441	4439	7536362109753764	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/pieces/Knight.cpp.obj	f2ddffac7ce6a64d
+66	4739	7536362085967735	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/engine/Engine.cpp.obj	6482bd1d0fa392a7
+3440	5000	7536362119734113	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/pieces/Rook.cpp.obj	1f41e743cec2f717
+3549	5985	7536362120784138	CMakeFiles/ChessLayoutEngine.dir/ea59de1e6d9e3994d0b784d360e49afd/Non-conflictingChessLayout/ChessLayoutEngine/main.cpp.obj	a1da9ad9fdbc5c53
+46	1199	7536364359238088	ChessLayoutEngine.exe	2aa7454eb0d7cec8
+15	910	7536364569462852	build.ninja	52ab3a1ead8c41e8
+47	1242	7536364571262885	C:/Users/zrajrob/OneDrive - Ericsson/Documents/Non-Conflicting Chess Layout/Non-conflictingChessLayout/ChessLayoutEngine.exe	4655b29dc83f052b

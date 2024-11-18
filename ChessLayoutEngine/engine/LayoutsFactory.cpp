@@ -11,7 +11,7 @@ Layouts LayoutsFactory::createLayout(int x) {
 	case 3:
 		return Layouts::FIRST;
 	default:
-		std::cout << "Layout non existings\n";
+		std::cout << "Error: Layout not existing\n %d"<< x << std::endl;
 		exit(1);
 	}
 }

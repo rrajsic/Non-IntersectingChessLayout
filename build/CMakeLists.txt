@@ -10,16 +10,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Include directories for headers
 include_directories(
-    boards
-    engine
-    pieces
+    ../ChessLayoutEngine/boards
+    ../ChessLayoutEngine/engine
+    ../ChessLayoutEngine/pieces
 )
 
 # Add source files
-file(GLOB BOARD_SOURCES boards/*.cpp)
-file(GLOB ENGINE_SOURCES engine/*.cpp)
-file(GLOB PIECE_SOURCES pieces/*.cpp)
-file(GLOB MAIN_SOURCE main.cpp)
+file(GLOB BOARD_SOURCES ../ChessLayoutEngine/boards/*.cpp)
+file(GLOB ENGINE_SOURCES ../ChessLayoutEngine/engine/*.cpp)
+file(GLOB PIECE_SOURCES ../ChessLayoutEngine/pieces/*.cpp)
+file(GLOB MAIN_SOURCE ../ChessLayoutEngine/main.cpp)
 
 # Combine all source files
 set(SOURCES
@@ -31,6 +31,11 @@ set(SOURCES
 
 # Add the executable
 add_executable(ChessLayoutEngine ${SOURCES})
+
+# Specify output directory for the executable
+set_target_properties(ChessLayoutEngine PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/.."
+)
 
 # Find SFML package
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)

@@ -225,6 +225,7 @@ class UI:
             width=200,
             height=100,
             bg_color="#0a4a1b",
+            text_color="#ffffff",
             font=self.roboto16,
         )
         success_label.place(relx=0.75, rely=0.15, anchor="center")
@@ -236,6 +237,7 @@ class UI:
             width=200,
             height=100,
             bg_color="#4a1818",
+            text_color="#ffffff",
             font=self.roboto16,
         )
         not_possible_label.place(relx=0.75, rely=0.15, anchor="center")
@@ -247,6 +249,7 @@ class UI:
             width=200,
             height=100,
             bg_color="#4a1818",
+            text_color="#ffffff",
             font=self.roboto16,
         )
         fail_label.place(relx=0.75, rely=0.15, anchor="center")

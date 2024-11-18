@@ -1,5 +1,5 @@
 ('C:\\Users\\zrajrob\\OneDrive - Ericsson\\Documents\\Non-Conflicting Chess '
- 'Layout\\Non-conflictingChessLayout\\build\\source\\PYZ-00.pyz',
+ 'Layout\\Non-IntersectingChessLayout\\build\\source\\PYZ-00.pyz',
  [('PIL',
    'C:\\Users\\zrajrob\\AppData\\Roaming\\Python\\Python311\\site-packages\\PIL\\__init__.py',
    'PYMODULE'),
@@ -916,7 +916,7 @@
   ('ui', '-', 'PYMODULE'),
   ('ui.ui',
    'C:\\Users\\zrajrob\\OneDrive - Ericsson\\Documents\\Non-Conflicting Chess '
-   'Layout\\Non-conflictingChessLayout\\ui\\ui.py',
+   'Layout\\Non-IntersectingChessLayout\\ui\\ui.py',
    'PYMODULE'),
   ('urllib',
    'C:\\Program Files\\Python311\\Lib\\urllib\\__init__.py',
